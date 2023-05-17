@@ -1,22 +1,20 @@
-package com.fiona.Services.Model;
+package com.fiona.HospitalLevels.model;
 
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Data
-public class ServicesModel {
+public class HospitalLevels {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID serviceId;
+    private UUID levelId;
     private String name;
 
-    @ManyToMany(mappedBy="services")
-    private Set<ServiceProviderModel> serviceProviders;
-
+    @OneToOne(mappedBy = "hospitalLevel")
+    private ServiceProviderModel serviceProvider;
 
 }
