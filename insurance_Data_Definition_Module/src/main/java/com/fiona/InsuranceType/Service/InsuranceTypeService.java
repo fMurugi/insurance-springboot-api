@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class InsuranceTypeService {
@@ -41,8 +42,20 @@ public class InsuranceTypeService {
     }
 
     //get all
-    public List<InsuranceType> getAllInsuranceTypes(){
-        return insuranceTypeRepository.findAll();
+    public List<InsuranceTypeDTO> getAllInsuranceTypes(){
+        List<InsuranceTypeDTO> insuranceTypeDTOList = null;
+         List<InsuranceType> insuranceTypeList= insuranceTypeRepository.findAll();
+
+         if(!insuranceTypeList.isEmpty()){
+             insuranceTypeDTOList = insuranceTypeList.stream()
+                     .map(insuranceType -> modelMapper.map(insuranceType, InsuranceTypeDTO.class))
+                     .collect(Collectors.toList());
+         }else {
+             insuranceTypeDTOList  = Collections.emptyList();
+         }
+
+         return insuranceTypeDTOList;
+
     }
 
     public InsuranceType updateInsuranceType(InsuranceType insuranceTypeReq){

@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +15,6 @@ public class APIResponse<T>{
 
     private String status;
 //    private List<> errors;
-    private T results;
+    private T body;
 
 }
