@@ -1,16 +1,19 @@
 package com.fiona.InsuranceType.Controller;
 
 import com.fiona.Exceptions.InsuranceTypeNotFoundException;
+import com.fiona.InsuranceType.DTO.APIResponse;
 import com.fiona.InsuranceType.DTO.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Model.InsuranceType;
 import com.fiona.InsuranceType.Repository.InsuranceTypeRepository;
 import com.fiona.InsuranceType.Service.InsuranceTypeService;
+import com.sun.net.httpserver.Authenticator;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +30,18 @@ public class InsuranceTypeController {
     @Autowired
     private InsuranceTypeRepository insuranceTypeRepository;
 
+    public static final String SUCCESS = "Success";
     @PostMapping("/create")
-    public ResponseEntity<InsuranceTypeDTO> createInsuranceType(@RequestBody @Valid InsuranceTypeDTO insuranceTypeDTO){
+    public ResponseEntity<APIResponse> createInsuranceType(@RequestBody @Valid InsuranceTypeDTO insuranceTypeDTO){
 
         InsuranceTypeDTO insuranceTypeDTORes  = insuranceTypeService.createInsuranceType(insuranceTypeDTO);
 
-        return  new ResponseEntity<>(insuranceTypeDTORes, HttpStatus.CREATED);
+        APIResponse<InsuranceTypeDTO> responseDTO = APIResponse
+                .<InsuranceTypeDTO>builder()
+                .status(SUCCESS)
+                .results(insuranceTypeDTORes)
+                .build();
+        return  new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 //    @GetMapping("/all")
 //    public Object  getAllInsuranceTypes(){
