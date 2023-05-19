@@ -6,10 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class InsuranceTypeDTO {
+    private UUID insuranceTypeId;
     @NotBlank(message = "Name cannot be blank/null")
     private String name;
     @NotBlank(message = "description cannot be null/blank")

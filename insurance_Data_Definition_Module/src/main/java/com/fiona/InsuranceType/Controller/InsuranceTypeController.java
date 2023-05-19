@@ -23,69 +23,44 @@ public class InsuranceTypeController {
     private InsuranceTypeRepository insuranceTypeRepository;
 
     public static final String SUCCESS = "Success";
+    private <T> ResponseEntity<APIResponse> buildResponseEntity(HttpStatus status, T body) {
+        APIResponse<T> responseDTO = APIResponse.<T>builder()
+                .status(SUCCESS)
+                .body(body)
+                .build();
+        return new ResponseEntity<>(responseDTO, status);
+    }
+
+    /**
+     * @param insuranceTypeDTO
+     * @return
+     */
     @PostMapping("/create")
     public ResponseEntity<APIResponse> createInsuranceType(@RequestBody @Valid InsuranceTypeDTO insuranceTypeDTO){
 
         InsuranceTypeDTO insuranceTypeDTORes  = insuranceTypeService.createInsuranceType(insuranceTypeDTO);
 
-        APIResponse<InsuranceTypeDTO> responseDTO = APIResponse
-                .<InsuranceTypeDTO>builder()
-                .status(SUCCESS)
-                .body(insuranceTypeDTORes)
-                .build();
-        return  new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+
+        return buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTORes);
     }
 
 
     @GetMapping("/all")
-    public ResponseEntity<APIResponse>  getAllInsuranceTypes(){
+    public ResponseEntity<APIResponse> getAllInsuranceTypes(){
        List<InsuranceTypeDTO> insuranceTypeDTOList = insuranceTypeService.getAllInsuranceTypes();
 
-       APIResponse<List<InsuranceTypeDTO>> responseDTO = APIResponse
-               .<List<InsuranceTypeDTO>>builder()
-               .status(SUCCESS)
-               .body( insuranceTypeDTOList)
-               .build();
-       return  new ResponseEntity<>(responseDTO,HttpStatus.OK);
+      return buildResponseEntity(HttpStatus.OK,insuranceTypeDTOList);
 
 
     }
 
-//    @GetMapping("/getAll")
-//    public List<InsuranceType> getAllInsuranceTypesWithUUID(){
-//         List<InsuranceType> insuranceTypeList = insuranceTypeRepository.findAll();
-//         return  insuranceTypeList;
-//    }
-
     //update
+    @PostMapping("/update")
+    public ResponseEntity<APIResponse> updateInsuranceType(@RequestBody InsuranceTypeDTO payload){
+        InsuranceTypeDTO insuranceTypeDTORes =  insuranceTypeService.updateInsuranceType(payload);
 
-//    @PostMapping("/update")
-//    public ResponseEntity<InsuranceTypeDTO> updateInsuranceType(@RequestBody InsuranceType payload){
-//        UUID id = payload.getInsuranceTypeId();
-//
-//        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++"+ id);
-//
-//        InsuranceType insuranceTypeReq = modelMapper.map(payload, InsuranceType.class);
-//
-//        // Check if the resource exists
-//
-//        InsuranceType insuranceType = insuranceTypeRepository.findById(id)
-//                .orElseThrow(()-> new InsuranceTypeNotFoundException("insuranceType with id" + id + " NOT FOUND"));
-//
-//        insuranceType.setName(insuranceTypeReq.getName());
-//        insuranceType.setDescription(insuranceTypeReq.getDescription());
-//
-//        //save the request to the db as an entity
-//       InsuranceType updateInsuranceType= insuranceTypeService.updateInsuranceType(insuranceType);
-//
-//
-//        //convert entity to DTO
-//        InsuranceTypeDTO insuranceTypeResPonse = modelMapper.map(updateInsuranceType,InsuranceTypeDTO.class);
-//
-//        return  new ResponseEntity<>(insuranceTypeResPonse, HttpStatus.CREATED);
-//
-//
-//    }
+        return  buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTORes);
+    }
 
 
 }

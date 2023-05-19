@@ -23,10 +23,7 @@ public class InsuranceTypeService {
     @Autowired
     private ModelMapper modelMapper;
 
-    //Post
-//    public Res createInsuranceType(InsuranceType insuranceType){
-//        return   insuranceTypeRepository.save(insuranceType);
-//    }
+
     public InsuranceTypeDTO createInsuranceType(InsuranceTypeDTO insuranceTypeDTORequest){
         //convert dto to entity
         InsuranceType insuranceType = modelMapper.map(insuranceTypeDTORequest,InsuranceType.class);
@@ -58,9 +55,25 @@ public class InsuranceTypeService {
 
     }
 
-    public InsuranceType updateInsuranceType(InsuranceType insuranceTypeReq){
+    public InsuranceTypeDTO updateInsuranceType(InsuranceTypeDTO insuranceTypeDTOReq){
+            // get the id
+        UUID id  =  insuranceTypeDTOReq.getInsuranceTypeId();
 
-        return insuranceTypeRepository.save(insuranceTypeReq);
+        InsuranceType insuranceType = modelMapper.map(insuranceTypeDTOReq,InsuranceType.class);
+
+        InsuranceType insuranceTypeDbRes = insuranceTypeRepository.findById(id)
+                .orElseThrow(()-> new InsuranceTypeNotFoundException("insuranceType with id" + id + " NOT FOUND"));
+
+        insuranceType.setName(insuranceTypeDTOReq.getName());
+        insuranceType.setDescription(insuranceTypeDTOReq.getDescription());
+
+        InsuranceType updatedInsuranceType = insuranceTypeRepository.save(insuranceType);
+
+        //change entity to dto
+        InsuranceTypeDTO insuranceTypeDTORes = modelMapper.map(insuranceType,InsuranceTypeDTO.class);
+
+
+        return insuranceTypeDTORes;
     }
 }
 
