@@ -1,6 +1,6 @@
 package com.fiona.InsuranceType.Controller;
 
-import com.fiona.InsuranceType.DTO.APIResponse;
+import com.fiona.Exceptions.APIResponse;
 import com.fiona.InsuranceType.DTO.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Repository.InsuranceTypeRepository;
 import com.fiona.InsuranceType.Service.InsuranceTypeService;

@@ -1,4 +1,4 @@
-package com.fiona.InsuranceType.DTO;
+package com.fiona.Exceptions;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

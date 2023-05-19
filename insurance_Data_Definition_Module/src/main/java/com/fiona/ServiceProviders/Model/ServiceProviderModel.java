@@ -17,7 +17,7 @@ public class ServiceProviderModel {
     private UUID serviceProviderId;
     private String name;
     private String location;
-    private String level;
+//    private String level;
 
     @ManyToMany(cascade = CascadeType.ALL)
             @JoinTable(
