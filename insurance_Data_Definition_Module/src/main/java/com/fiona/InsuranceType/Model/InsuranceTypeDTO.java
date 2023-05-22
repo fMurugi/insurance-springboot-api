@@ -1,4 +1,4 @@
-package com.fiona.InsuranceType.DTO;
+package com.fiona.InsuranceType.Model;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

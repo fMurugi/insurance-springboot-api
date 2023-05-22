@@ -1,6 +1,6 @@
 package com.fiona.ServiceProviders.Controller;
 
-import com.fiona.Exceptions.APIResponse;
+import com.fiona.Classes.APIResponse;
 import com.fiona.ServiceProviders.DTO.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Service.ServiceProviderService;
 import jakarta.validation.Valid;
@@ -24,7 +24,7 @@ public class ServiceProviderController {
     private ServiceProviderService serviceProviderService;
     private <T> ResponseEntity<APIResponse> buildResponseEntity(HttpStatus status, T body) {
         APIResponse<T> responseDTO = APIResponse.<T>builder()
-                .status(SUCCESS)
+//                .status(SUCCESS)
                 .body(body)
                 .build();
         return new ResponseEntity<>(responseDTO, status);

@@ -1,18 +1,14 @@
 package com.fiona.InsuranceType.Service;
 
 import com.fiona.Exceptions.InsuranceTypeNotFoundException;
-import com.fiona.InsuranceType.DTO.InsuranceTypeDTO;
+import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Model.InsuranceType;
 import com.fiona.InsuranceType.Repository.InsuranceTypeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,40 +36,23 @@ public class InsuranceTypeService {
 
     //get all
     public List<InsuranceTypeDTO> getAllInsuranceTypes(){
-        List<InsuranceTypeDTO> insuranceTypeDTOList = null;
          List<InsuranceType> insuranceTypeList= insuranceTypeRepository.findAll();
 
-         if(!insuranceTypeList.isEmpty()){
-             insuranceTypeDTOList = insuranceTypeList.stream()
+        List<InsuranceTypeDTO> insuranceTypeDTOList = insuranceTypeList.stream()
                      .map(insuranceType -> modelMapper.map(insuranceType, InsuranceTypeDTO.class))
                      .collect(Collectors.toList());
-         }else {
-             insuranceTypeDTOList  = Collections.emptyList();
-         }
-
          return insuranceTypeDTOList;
-
     }
 
-    public InsuranceTypeDTO updateInsuranceType(InsuranceTypeDTO insuranceTypeDTOReq){
+    public List<InsuranceTypeDTO> updateInsuranceType(InsuranceTypeDTO insuranceTypeDTOReq){
             // get the id
-        UUID id  =  insuranceTypeDTOReq.getInsuranceTypeId();
-
-        InsuranceType insuranceType = modelMapper.map(insuranceTypeDTOReq,InsuranceType.class);
-
-        InsuranceType insuranceTypeDbRes = insuranceTypeRepository.findById(id)
-                .orElseThrow(()-> new InsuranceTypeNotFoundException("insuranceType with id" + id + " NOT FOUND"));
+        InsuranceType insuranceType = insuranceTypeRepository.findById(insuranceTypeDTOReq.getInsuranceTypeId())
+                .orElseThrow(() -> new InsuranceTypeNotFoundException("insuranceType with id " + insuranceTypeDTOReq.getInsuranceTypeId() + " not found"));
 
         insuranceType.setName(insuranceTypeDTOReq.getName());
         insuranceType.setDescription(insuranceTypeDTOReq.getDescription());
 
-        InsuranceType updatedInsuranceType = insuranceTypeRepository.save(insuranceType);
-
-        //change entity to dto
-        InsuranceTypeDTO insuranceTypeDTORes = modelMapper.map(insuranceType,InsuranceTypeDTO.class);
-
-
-        return insuranceTypeDTORes;
+        return getAllInsuranceTypes();
     }
 }
 
