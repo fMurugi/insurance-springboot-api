@@ -11,7 +11,6 @@ import java.util.UUID;
 @Data
 @Table(name = "serviceProviderLimits")
 public class ServiceProviderLimits {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID serviceProvidersLimitId;

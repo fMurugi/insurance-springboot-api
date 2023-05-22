@@ -9,14 +9,13 @@ import java.util.UUID;
 
 @Entity
 @Data
+@Table(name="data_premium_limit")
 public class PremiumLimit {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID premiumLimitId;
-
     private Integer minAge;
     private Integer maxAge;
-
     @ManyToMany(mappedBy = "premiumLimit")
     private Set<ServiceProviderModel> serviceProvider;
 

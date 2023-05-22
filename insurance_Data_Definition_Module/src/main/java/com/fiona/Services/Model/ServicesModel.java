@@ -9,6 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+@Table(name="data_services")
 public class ServicesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

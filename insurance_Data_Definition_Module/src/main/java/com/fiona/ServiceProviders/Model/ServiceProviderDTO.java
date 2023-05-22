@@ -1,4 +1,4 @@
-package com.fiona.ServiceProviders.DTO;
+package com.fiona.ServiceProviders.Model;
 
 import com.fiona.HospitalLevels.model.HospitalLevels;
 import lombok.AllArgsConstructor;

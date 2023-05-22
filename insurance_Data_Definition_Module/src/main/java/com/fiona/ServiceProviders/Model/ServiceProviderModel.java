@@ -11,14 +11,13 @@ import java.util.UUID;
 
 @Entity
 @Data
+@Table(name="data_service_provider")
 public class ServiceProviderModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID serviceProviderId;
     private String name;
     private String location;
-//    private String level;
-
     @ManyToMany(cascade = CascadeType.ALL)
             @JoinTable(
                     name = "serviceProviderService",
@@ -26,17 +25,14 @@ public class ServiceProviderModel {
                     inverseJoinColumns = @JoinColumn(name = "serviceId")
             )
     private Set<ServicesModel> services;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "levelId")
     private HospitalLevels hospitalLevel;
-
     @ManyToMany
     @JoinTable(
             name="serviceProviderLimits",
             joinColumns = @JoinColumn(name = "serviceProviderId"),
             inverseJoinColumns = @JoinColumn(name = "premiumLimitId")
-
     )
     private  Set<PremiumLimit> premiumLimit;
 

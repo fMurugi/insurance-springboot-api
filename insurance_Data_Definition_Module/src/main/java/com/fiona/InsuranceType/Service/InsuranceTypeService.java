@@ -13,25 +13,15 @@ import java.util.stream.Collectors;
 
 @Service
 public class InsuranceTypeService {
-
     @Autowired
     private InsuranceTypeRepository insuranceTypeRepository;
     @Autowired
     private ModelMapper modelMapper;
 
-
-    public InsuranceTypeDTO createInsuranceType(InsuranceTypeDTO insuranceTypeDTORequest){
-        //convert dto to entity
-        InsuranceType insuranceType = modelMapper.map(insuranceTypeDTORequest,InsuranceType.class);
-
+       public InsuranceTypeDTO createInsuranceType(InsuranceTypeDTO insuranceTypeDTORequest) {
+        InsuranceType insuranceType = modelMapper.map(insuranceTypeDTORequest, InsuranceType.class);
         InsuranceType insuranceTypeResults = insuranceTypeRepository.save(insuranceType);
-
-        //convert entity back to Dto
-
-        InsuranceTypeDTO insuranceTypeDTO = modelMapper.map(insuranceTypeResults,InsuranceTypeDTO.class);
-
-        return  insuranceTypeDTO;
-
+        return modelMapper.map(insuranceTypeResults, InsuranceTypeDTO.class);
     }
 
     //get all
@@ -51,11 +41,16 @@ public class InsuranceTypeService {
 
         insuranceType.setName(insuranceTypeDTOReq.getName());
         insuranceType.setDescription(insuranceTypeDTOReq.getDescription());
-
         return getAllInsuranceTypes();
     }
+    public InsuranceTypeDTO deleteInsuranceType(InsuranceTypeDTO insuranceTypeDTO){
+        InsuranceType insuranceType = insuranceTypeRepository.findById(insuranceTypeDTO.getInsuranceTypeId())
+                .orElseThrow(() -> new InsuranceTypeNotFoundException("insuranceType with id " + insuranceTypeDTO.getInsuranceTypeId() + " not found"));
+         insuranceTypeRepository.delete(insuranceType);
+        return modelMapper.map(insuranceType, InsuranceTypeDTO.class);
+    }
+
 }
 
-    //  update
 
 

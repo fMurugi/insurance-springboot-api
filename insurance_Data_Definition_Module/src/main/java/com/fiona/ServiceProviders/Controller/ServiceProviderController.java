@@ -1,7 +1,7 @@
 package com.fiona.ServiceProviders.Controller;
 
 import com.fiona.Classes.APIResponse;
-import com.fiona.ServiceProviders.DTO.ServiceProviderDTO;
+import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Service.ServiceProviderService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

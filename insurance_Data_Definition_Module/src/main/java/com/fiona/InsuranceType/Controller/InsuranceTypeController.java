@@ -54,4 +54,11 @@ public class InsuranceTypeController {
         return  buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTOList,"update successful","/api/insuranceType/update");
     }
 
+    @PostMapping("/delete")
+    public ResponseEntity<APIResponse> deleteInsuranceType(@RequestBody InsuranceTypeDTO payload){
+        InsuranceTypeDTO insuranceTypeDTO = insuranceTypeService.deleteInsuranceType(payload);
+        return  buildResponseEntity(HttpStatus.OK,insuranceTypeDTO,"deleted successfuly","api/insuranceType/delete");
+    }
+
+
 }

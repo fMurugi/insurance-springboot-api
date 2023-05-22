@@ -1,6 +1,6 @@
 package com.fiona.ServiceProviders.Service;
 
-import com.fiona.ServiceProviders.DTO.ServiceProviderDTO;
+import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.ServiceProviders.Repository.ServiceProvidersRepository;
 import lombok.AllArgsConstructor;
