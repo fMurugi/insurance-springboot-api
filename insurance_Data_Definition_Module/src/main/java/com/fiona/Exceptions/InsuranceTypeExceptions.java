@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 
 @ControllerAdvice
 class InsuranceTypeExceptions {
-    @ExceptionHandler(InsuranceTypeNotFoundException.class)
-    public ResponseEntity<Object> handleInsuranceTypeNotFound(InsuranceTypeNotFoundException ex , WebRequest request){
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Object> handleInsuranceTypeNotFound(ResourceNotFoundException ex , WebRequest request){
         return  new ResponseEntity<>(new APiError(ex.getMessage(), HttpStatus.NOT_FOUND, LocalDateTime.now()),HttpStatus.NOT_FOUND);
     }
 }

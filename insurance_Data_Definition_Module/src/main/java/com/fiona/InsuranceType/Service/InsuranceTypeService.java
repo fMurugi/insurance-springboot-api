@@ -1,6 +1,6 @@
 package com.fiona.InsuranceType.Service;
 
-import com.fiona.Exceptions.InsuranceTypeNotFoundException;
+import com.fiona.Exceptions.ResourceNotFoundException;
 import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Model.InsuranceType;
 import com.fiona.InsuranceType.Repository.InsuranceTypeRepository;
@@ -37,7 +37,7 @@ public class InsuranceTypeService {
     public List<InsuranceTypeDTO> updateInsuranceType(InsuranceTypeDTO insuranceTypeDTOReq){
             // get the id
         InsuranceType insuranceType = insuranceTypeRepository.findById(insuranceTypeDTOReq.getInsuranceTypeId())
-                .orElseThrow(() -> new InsuranceTypeNotFoundException("insuranceType with id " + insuranceTypeDTOReq.getInsuranceTypeId() + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("insuranceType with id " + insuranceTypeDTOReq.getInsuranceTypeId() + " not found"));
 
         insuranceType.setName(insuranceTypeDTOReq.getName());
         insuranceType.setDescription(insuranceTypeDTOReq.getDescription());
@@ -45,7 +45,7 @@ public class InsuranceTypeService {
     }
     public InsuranceTypeDTO deleteInsuranceType(InsuranceTypeDTO insuranceTypeDTO){
         InsuranceType insuranceType = insuranceTypeRepository.findById(insuranceTypeDTO.getInsuranceTypeId())
-                .orElseThrow(() -> new InsuranceTypeNotFoundException("insuranceType with id " + insuranceTypeDTO.getInsuranceTypeId() + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("insuranceType with id " + insuranceTypeDTO.getInsuranceTypeId() + " not found"));
          insuranceTypeRepository.delete(insuranceType);
         return modelMapper.map(insuranceType, InsuranceTypeDTO.class);
     }

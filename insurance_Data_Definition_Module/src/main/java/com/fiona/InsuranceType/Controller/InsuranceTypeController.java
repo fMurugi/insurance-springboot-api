@@ -23,7 +23,7 @@ public class InsuranceTypeController {
     @Autowired
     private InsuranceTypeRepository insuranceTypeRepository;
     public static final String SUCCESS = "Success";
-    
+
 
     /**
      * @param insuranceTypeDTO
