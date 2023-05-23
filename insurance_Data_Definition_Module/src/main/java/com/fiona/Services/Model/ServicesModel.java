@@ -14,6 +14,7 @@ public class ServicesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID serviceId;
+    @Column(unique = true)
     private String name;
 
     @ManyToMany(mappedBy="services")

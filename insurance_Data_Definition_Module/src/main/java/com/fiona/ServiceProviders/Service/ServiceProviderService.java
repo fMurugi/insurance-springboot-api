@@ -6,6 +6,8 @@ import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
 import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.ServiceProviders.Repository.ServiceProvidersRepository;
+import com.fiona.Services.Model.ServicesModel;
+import com.fiona.Services.Repository.ServiceRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,10 +25,14 @@ public class ServiceProviderService {
     private ModelMapper modelMapper;
     @Autowired
     private ServiceProvidersRepository serviceProvidersRepository;
-
+    @Autowired
+    private ServiceRepository serviceRepository;
     public ServiceProviderDTO createNewServiceProvider(ServiceProviderDTO serviceProviderDTOReq){
         ServiceProviderModel serviceProviderModel = modelMapper.map(serviceProviderDTOReq, ServiceProviderModel.class);
-        ServiceProviderModel serviceProviderDbResponse = serviceProvidersRepository.save(serviceProviderModel);
+        for(ServicesModel service: serviceProviderModel.getServices()){
+            serviceRepository.save(service);
+        }
+            ServiceProviderModel serviceProviderDbResponse = serviceProvidersRepository.save(serviceProviderModel);
         return  modelMapper.map(serviceProviderDbResponse,ServiceProviderDTO.class);
     }
 
