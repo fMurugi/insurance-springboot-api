@@ -22,6 +22,7 @@ public class PremiumLimitDTO {
     private Integer minAge;
     @NotBlank(message = "maximum Age cannot be blank")
     private Integer maxAge;
-    private Set<ServiceProviderModel> serviceProvider;
+    private  UUID serviceProviderId;
+//    private Set<ServiceProviderModel> serviceProvider;
 
 }

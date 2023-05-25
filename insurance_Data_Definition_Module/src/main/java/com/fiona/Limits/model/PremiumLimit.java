@@ -18,5 +18,4 @@ public class PremiumLimit {
     private Integer maxAge;
     @ManyToMany(mappedBy = "premiumLimit")
     private Set<ServiceProviderModel> serviceProvider;
-
 }

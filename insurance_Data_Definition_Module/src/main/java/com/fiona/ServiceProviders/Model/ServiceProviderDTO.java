@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,13 +17,12 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ServiceProviderDTO {
     private UUID serviceProviderId;
-    @NotBlank(message="name cannot be BLANK")
+    @NotBlank(message = "name cannot be BLANK")
     private String name;
     @NotBlank(message = "location cannot be BLANK")
     private String location;
     private HospitalLevels hospitalLevel;
-    private Set<ServicesModel> services;
+    private Set<ServicesModel> services=new HashSet<>();
     private  Set<PremiumLimit> premiumLimit;
-
 
 }

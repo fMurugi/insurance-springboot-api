@@ -6,6 +6,7 @@ import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.Services.Model.ServicesDTO;
 import com.fiona.Services.Model.ServicesModel;
 import com.fiona.Services.Repository.ServiceRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class ServicesService {
     private ModelMapper modelMapper;
 
     //create services
+    @Transactional
     public ServicesDTO createNewService(ServicesDTO servicesDTORequest){
        ServicesModel services=serviceRepository.save((modelMapper.map(servicesDTORequest, ServicesModel.class)));
        return modelMapper.map(services, ServicesDTO.class);
@@ -35,9 +37,12 @@ public class ServicesService {
              return servicesDTOList;
     }
 
-    // update
-    //delete
-    //change the find by id to name because name will be unique
+
+    /**
+     * @param servicesDTO
+     * @return list of ServicesDTO
+     */
+    @Transactional
     public List<ServicesDTO> updateService(ServicesDTO servicesDTO){
         ServicesModel servicesModel = serviceRepository.findById(servicesDTO.getServiceId())
                 .orElseThrow(() -> new ResourceNotFoundException("serviceProvider  with id " + servicesDTO.getServiceId() + " not found"));
@@ -46,6 +51,7 @@ public class ServicesService {
         return getAllServices();
     }
 
+    @Transactional
     public List<ServicesDTO> deleteService(ServicesDTO servicesDTO){
         ServicesModel servicesModel = serviceRepository.findById(servicesDTO.getServiceId())
                 .orElseThrow(()-> new ResourceNotFoundException("ServiceProvider with id " + servicesDTO.getServiceId() + " not found"));

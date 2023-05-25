@@ -44,6 +44,11 @@ public class ServiceProviderController {
     public ResponseEntity<APIResponse> getAllServiceProviders(){
         return  buildResponseEntity(HttpStatus.OK,serviceProviderService.getAllServiceProviders(),"returned All service providers","/api/ServiceProviders/all");
     }
+//    @GetMapping("/serviceProvider")
+//    public ResponseEntity<APIResponse> getServiceProviderByName(@RequestBody ServiceProviderDTO payload){
+//        return buildResponseEntity(HttpStatus.OK,serviceProviderService.getServiceProviderByName(payload),"returned service providerr by name","api/ServiceProviders/serviceProvider");
+//
+//    }
     //delete
     @PostMapping("/delete")
     public ResponseEntity<APIResponse> deleteServiceProvider(@RequestBody ServiceProviderDTO payload){

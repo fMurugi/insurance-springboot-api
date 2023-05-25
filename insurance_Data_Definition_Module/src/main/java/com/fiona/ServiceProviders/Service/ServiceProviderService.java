@@ -6,8 +6,10 @@ import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
 import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.ServiceProviders.Repository.ServiceProvidersRepository;
+import com.fiona.Services.Model.ServicesDTO;
 import com.fiona.Services.Model.ServicesModel;
 import com.fiona.Services.Repository.ServiceRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -29,12 +31,16 @@ public class ServiceProviderService {
     private ServiceRepository serviceRepository;
     public ServiceProviderDTO createNewServiceProvider(ServiceProviderDTO serviceProviderDTOReq){
         ServiceProviderModel serviceProviderModel = modelMapper.map(serviceProviderDTOReq, ServiceProviderModel.class);
-        for(ServicesModel service: serviceProviderModel.getServices()){
-            serviceRepository.save(service);
-        }
-            ServiceProviderModel serviceProviderDbResponse = serviceProvidersRepository.save(serviceProviderModel);
+        ServiceProviderModel serviceProviderDbResponse = serviceProvidersRepository.save(serviceProviderModel);
         return  modelMapper.map(serviceProviderDbResponse,ServiceProviderDTO.class);
     }
+    @Transactional
+    public ServiceProviderDTO getServiceProviderByName(ServiceProviderDTO serviceProviderDTOReq){
+        ServiceProviderModel serviceProviderModel = modelMapper.map(serviceProviderDTOReq, ServiceProviderModel.class);
+        ServiceProviderModel serviceProviderDbResponse = serviceProvidersRepository.findByName(serviceProviderDTOReq.getName());
+        return  modelMapper.map(serviceProviderDbResponse,ServiceProviderDTO.class);
+    }
+
 
     public List<ServiceProviderDTO> getAllServiceProviders(){
         List<ServiceProviderModel> serviceProvidersList= serviceProvidersRepository.findAll();
@@ -45,6 +51,7 @@ public class ServiceProviderService {
         return serviceProviderDtoList;
     }
 
+    @Transactional
     public List<ServiceProviderDTO> updateServiceProvider(ServiceProviderDTO serviceProviderDTORequest){
         ServiceProviderModel serviceProvider = serviceProvidersRepository.findById(serviceProviderDTORequest.getServiceProviderId())
                 .orElseThrow(() -> new ResourceNotFoundException("serviceProvider  with id " + serviceProviderDTORequest.getServiceProviderId() + " not found"));
@@ -61,4 +68,6 @@ public class ServiceProviderService {
         serviceProvidersRepository.delete(serviceProvider);
         return getAllServiceProviders();
     }
+
+
 }
