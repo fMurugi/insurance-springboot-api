@@ -1,8 +1,9 @@
 package com.fiona.HospitalLevels.model;
-//        ! todo  KINDLY ADD THE FILE, TO A FOLDER STSTING EHAT IT IS SUPPOSED TO DO, i.e repository,model,service e.t.c
+//        ! todo  KINDLY ADD THE FILE, TO A FOLDER STSTING EHAT IT IS SUPPOSED TO DO, i.e repository,model,service e.t.c -dont understand this
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NonNull;
 
 import java.util.UUID;
 
@@ -12,7 +13,10 @@ import java.util.UUID;
 public class HospitalLevels {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="levelId")
+    @NonNull
     private UUID levelId;
+    @Column(name="NotBlank")
     private String name;
     @OneToOne(mappedBy = "hospitalLevel")
     private ServiceProviderModel serviceProvider;

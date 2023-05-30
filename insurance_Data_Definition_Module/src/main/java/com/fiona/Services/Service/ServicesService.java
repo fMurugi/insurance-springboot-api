@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -21,14 +22,12 @@ public class ServicesService {
     private  ServiceRepository serviceRepository;
     private ModelMapper modelMapper;
 
-    //create services
     @Transactional
     public ServicesDTO createNewService(ServicesDTO servicesDTORequest){
        ServicesModel services=serviceRepository.save((modelMapper.map(servicesDTORequest, ServicesModel.class)));
        return modelMapper.map(services, ServicesDTO.class);
     }
 
-    //getAll
     public List<ServicesDTO> getAllServices(){
         List<ServicesDTO> servicesDTOList = serviceRepository.findAll()
                 .stream()
@@ -39,25 +38,26 @@ public class ServicesService {
 
 
     /**
-     * @param servicesDTO
+     * @param data
      * @return list of ServicesDTO
      */
     @Transactional
-    public List<ServicesDTO> updateService(ServicesDTO servicesDTO){
-        ServicesModel servicesModel = serviceRepository.findById(servicesDTO.getServiceId())
-                .orElseThrow(() -> new ResourceNotFoundException("serviceProvider  with id " + servicesDTO.getServiceId() + " not found"));
-
-        servicesModel.setName(servicesDTO.getName());
+    public List<ServicesDTO> updateService(ServicesDTO data){
+        ServicesModel servicesModel = findServiceById(data.getServiceId());
+        servicesModel.setName(data.getName());
         return getAllServices();
     }
 
     @Transactional
-    public List<ServicesDTO> deleteService(ServicesDTO servicesDTO){
-        ServicesModel servicesModel = serviceRepository.findById(servicesDTO.getServiceId())
-                .orElseThrow(()-> new ResourceNotFoundException("ServiceProvider with id " + servicesDTO.getServiceId() + " not found"));
-
+    public List<ServicesDTO> deleteService(ServicesDTO data){
+        ServicesModel servicesModel = findServiceById(data.getServiceId());
         serviceRepository.delete(servicesModel);
         return getAllServices();
+    }
+
+    public ServicesModel findServiceById(UUID id){
+        return serviceRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Service with id "+ id+ "NOT FOUND"));
     }
 
 }
