@@ -24,6 +24,8 @@ public class ServiceProviderModel {
     private UUID serviceProviderId;
     private String name;
     private String location;
+
+
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
             @JoinTable(
                     name = "serviceProviderService",

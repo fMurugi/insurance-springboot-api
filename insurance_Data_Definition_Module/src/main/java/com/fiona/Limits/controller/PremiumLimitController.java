@@ -40,6 +40,8 @@ public class PremiumLimitController {
                     )
             }
     )
+
+//    todo why are we hiding the endpoint create ????
     @Hidden
     @PostMapping("/create")
     public ResponseEntity<APIResponse> createNewLimits(@RequestBody @Valid PremiumLimitDTO payload){
@@ -49,6 +51,7 @@ public class PremiumLimitController {
 
     @Hidden
     //update
+//    todo, the HttpStatus for update is invalid.
     @PostMapping("/update")
     public ResponseEntity<APIResponse> updateLimit(@RequestBody PremiumLimitDTO payload){
         List<PremiumLimitDTO> premiumLimitDTOList = limitsService.updateLimit(payload);

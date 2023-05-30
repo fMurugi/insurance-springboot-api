@@ -8,5 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ServiceProvidersRepository extends JpaRepository<ServiceProviderModel,UUID> {
+
+//    todo comments here on the expected functionality.
     ServiceProviderModel findByName(String name);
 }

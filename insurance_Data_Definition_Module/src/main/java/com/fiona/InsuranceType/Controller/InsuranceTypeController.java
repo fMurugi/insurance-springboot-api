@@ -16,12 +16,20 @@ import java.util.List;
 import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
+//        ! todo  USE CAMEL CASE TO DEFINE YOUR API ENDPOINTS, I.E (insurance_type)
+//        ! todo  ADD THE VERSION OF THE ENDPOINT BEING USED. I.E (api/v1/insurance_type)
+//        ! todo  USE THE FOLLOWING CONVENTIONS TO CREATE YOUR ENDPOINT URLS  (create_????, fetch_all_???, fetch_single_????, update_single_?? delete_single_???)
+
 @RequestMapping("/api/insuranceType")
 public class InsuranceTypeController {
     @Autowired
     private InsuranceTypeService insuranceTypeService;
+
+    //        ! todo  UNUSED INJECTION.
     @Autowired
     private InsuranceTypeRepository insuranceTypeRepository;
+
+    //        ! todo  UNUSED CONSTANT.
     public static final String SUCCESS = "Success";
 
 
@@ -42,6 +50,7 @@ public class InsuranceTypeController {
     }
 
     @PostMapping("/update")
+//! todo  the implementation of the vaiable payload is commendable.
     public ResponseEntity<APIResponse> updateInsuranceType(@RequestBody InsuranceTypeDTO payload){
         List<InsuranceTypeDTO> insuranceTypeDTOList =  insuranceTypeService.updateInsuranceType(payload);
         return  buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTOList,"update successful","/api/insuranceType/update");
