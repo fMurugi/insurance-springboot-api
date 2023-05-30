@@ -26,7 +26,7 @@ public class ServicesModel {
     private String name;
 
     @ManyToMany(mappedBy="services",fetch = FetchType.LAZY,cascade = { CascadeType.ALL })
-    @JsonIgnore
+
     private Set<ServiceProviderModel> serviceProviders=new HashSet<>();
 
 

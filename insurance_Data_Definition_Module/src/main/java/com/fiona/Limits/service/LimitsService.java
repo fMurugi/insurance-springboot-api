@@ -23,12 +23,12 @@ public class LimitsService {
     @Autowired
     private PremiumLimitRepository premiumLimitRepository;
 
-//    todo, on doing a post to add , kindly always return all the results not the individual one.
-    public PremiumLimitDTO createNewPremiumLimit(PremiumLimitDTO premiumLimitDTO){
+//    todo, on doing a post to add , kindly always return all the results not the individual one. -done
+    public List<PremiumLimitDTO> createNewPremiumLimit(PremiumLimitDTO premiumLimitDTO){
         PremiumLimit premiumLimit = modelMapper.map(premiumLimitDTO, PremiumLimit.class);
 
          premiumLimit = premiumLimitRepository.save(premiumLimit);
-        return  modelMapper.map(premiumLimit,PremiumLimitDTO.class);
+        return  getAllLimits();
     }
 
     public List<PremiumLimitDTO> getAllLimits(){

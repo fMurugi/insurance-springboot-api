@@ -41,21 +41,21 @@ public class PremiumLimitController {
             }
     )
 
-//    todo why are we hiding the endpoint create ????
-    @Hidden
+//    todo why are we hiding the endpoint create ???? --it was trial  -romoved the @hidden -done
+
     @PostMapping("/create")
     public ResponseEntity<APIResponse> createNewLimits(@RequestBody @Valid PremiumLimitDTO payload){
-        PremiumLimitDTO premiumLimitDTO = limitsService.createNewPremiumLimit(payload);
+        List<PremiumLimitDTO> premiumLimitDTO = limitsService.createNewPremiumLimit(payload);
         return buildResponseEntity(HttpStatus.CREATED,premiumLimitDTO,"created successfully","/api/limits/create");
     }
 
     @Hidden
     //update
-//    todo, the HttpStatus for update is invalid.
+//    todo, the HttpStatus for update is invalid. - why?  changed to OK -done
     @PostMapping("/update")
     public ResponseEntity<APIResponse> updateLimit(@RequestBody PremiumLimitDTO payload){
         List<PremiumLimitDTO> premiumLimitDTOList = limitsService.updateLimit(payload);
-        return  buildResponseEntity(HttpStatus.ACCEPTED,premiumLimitDTOList,"Updated successfully","/api/limits/update");
+        return  buildResponseEntity(HttpStatus.OK,premiumLimitDTOList,"Updated successfully","/api/limits/update");
     }
     //getALl
     @GetMapping("/all")

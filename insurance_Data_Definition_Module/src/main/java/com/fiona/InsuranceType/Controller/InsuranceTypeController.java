@@ -2,10 +2,9 @@ package com.fiona.InsuranceType.Controller;
 
 import com.fiona.Classes.APIResponse;
 import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
-import com.fiona.InsuranceType.Repository.InsuranceTypeRepository;
 import com.fiona.InsuranceType.Service.InsuranceTypeService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,35 +14,31 @@ import java.util.List;
 import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
-//        ! todo  USE CAMEL CASE TO DEFINE YOUR API ENDPOINTS, I.E (insurance_type)
-//        ! todo  ADD THE VERSION OF THE ENDPOINT BEING USED. I.E (api/v1/insurance_type)
-//        ! todo  USE THE FOLLOWING CONVENTIONS TO CREATE YOUR ENDPOINT URLS  (create_????, fetch_all_???, fetch_single_????, update_single_?? delete_single_???)
+//        ! todo  USE CAMEL CASE TO DEFINE YOUR API ENDPOINTS, I.E (insurance_type) - Done
+//        ! todo  ADD THE VERSION OF THE ENDPOINT BEING USED. I.E (api/v1/insurance_type) -Done
+//        ! todo  USE THE FOLLOWING CONVENTIONS TO CREATE YOUR ENDPOINT URLS  (create_????, fetch_all_???, fetch_single_????, update_single_?? delete_single_???) - Done
 
 @RequestMapping("/api/v1/insurance_type")
+@AllArgsConstructor
 public class InsuranceTypeController {
     private InsuranceTypeService insuranceTypeService;
 
-    //        ! todo  UNUSED INJECTION.
-    private InsuranceTypeRepository insuranceTypeRepository;
+    //        ! todo  UNUSED INJECTION. -Done
 
-    //        ! todo  UNUSED CONSTANT.
-    public static final String SUCCESS = "Success";
-
-    public InsuranceTypeController(InsuranceTypeService insuranceTypeService, InsuranceTypeRepository insuranceTypeRepository) {
-        this.insuranceTypeService = insuranceTypeService;
-        this.insuranceTypeRepository = insuranceTypeRepository;
-    }
-
-
+    //        ! todo  UNUSED CONSTANT. -Done
     /**
      * @param insuranceTypeDTO
      * @return
      */
+    // ! todo How do I parametrize the following methods?
     @PostMapping("/create/insurance_type")
     public ResponseEntity<APIResponse> createInsuranceType(@RequestBody @Valid InsuranceTypeDTO insuranceTypeDTO){
-        InsuranceTypeDTO insuranceTypeDTORes  = insuranceTypeService.createInsuranceType(insuranceTypeDTO);
-        return buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTORes,"created","/api/insuranceType/create");
+        String httpStatus = "created";
+        String requestUrl = "/api/insuranceType/create";
+        InsuranceTypeDTO insuranceTypeDTORes = insuranceTypeService.createInsuranceType(insuranceTypeDTO);
+        return buildResponseEntity(HttpStatus.CREATED, insuranceTypeDTORes, httpStatus, requestUrl);
     }
+
 
     @GetMapping("/fetch/all_insurance_types")
     public ResponseEntity<APIResponse> getAllInsuranceTypes(){
@@ -52,7 +47,7 @@ public class InsuranceTypeController {
     }
 
     @PostMapping("/update/single_insurance_types")
-//! todo  the implementation of the vaiable payload is commendable.
+//! todo  the implementation of the vaiable payload is commendable. -Done
     public ResponseEntity<APIResponse> updateInsuranceType(@RequestBody InsuranceTypeDTO payload){
         List<InsuranceTypeDTO> insuranceTypeDTOList =  insuranceTypeService.updateInsuranceType(payload);
         return  buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTOList,"update successful","/api/insuranceType/update");
