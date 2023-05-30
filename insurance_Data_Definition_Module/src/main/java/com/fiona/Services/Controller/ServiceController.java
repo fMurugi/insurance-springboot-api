@@ -16,7 +16,7 @@ import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/Services")
+@RequestMapping("/api/v1/Services")
 public class ServiceController {
     private ServicesService servicesService;
 
@@ -24,29 +24,29 @@ public class ServiceController {
      * @param payload
      * @return
      */
-    @PostMapping("/create")
+    @PostMapping("/create_service")
     public ResponseEntity<APIResponse> createNewService(@RequestBody @Valid ServicesDTO payload){
         ServicesDTO servicesDTO = servicesService.createNewService(payload);
-        return buildResponseEntity(HttpStatus.CREATED,servicesDTO,"created successfully","/api/Services/create");
+        return buildResponseEntity(HttpStatus.CREATED,servicesDTO,"created successfully","/api/Services/create_service");
     }
 
     //getALl
-    @GetMapping("/all")
+    @GetMapping("/get_all_services")
     public ResponseEntity<APIResponse> getAllServices(){
-        return  buildResponseEntity(HttpStatus.OK,servicesService.getAllServices(),"returned All services","/api/Services/all");
+        return  buildResponseEntity(HttpStatus.OK,servicesService.getAllServices(),"returned All services","/api/Services/get_all_services");
     }
 
     //update
-    @PostMapping("/update")
+    @PostMapping("/update_single_service")
     public ResponseEntity<APIResponse> updateService(@RequestBody ServicesDTO payload){
         List<ServicesDTO> servicesDTOList = servicesService.updateService(payload);
-        return  buildResponseEntity(HttpStatus.ACCEPTED,servicesDTOList,"Updated successfully","/api/Services/update");
+        return  buildResponseEntity(HttpStatus.ACCEPTED,servicesDTOList,"Updated successfully","/api/Services/update_single_service");
     }
 
     //delete
-    @PostMapping("/delete")
+    @PostMapping("/delete_single_service")
     public ResponseEntity<APIResponse> deleteService(@RequestBody ServicesDTO payload){
-        return  buildResponseEntity(HttpStatus.OK,servicesService.deleteService(payload),"deleted successfully","/api/Services/delete");
+        return  buildResponseEntity(HttpStatus.OK,servicesService.deleteService(payload),"deleted successfully","/api/Services/delete_single_service");
     }
 
 

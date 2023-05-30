@@ -1,6 +1,5 @@
 package com.fiona.ServiceProviders.Model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fiona.HospitalLevels.model.HospitalLevels;
 import com.fiona.Limits.model.PremiumLimit;
 import com.fiona.Services.Model.ServicesModel;
@@ -21,8 +20,12 @@ import java.util.UUID;
 public class ServiceProviderModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="serviceProviderId")
+    @NonNull
     private UUID serviceProviderId;
+    @Column(name="ServiceProviderName")
     private String name;
+    @Column(name="serviceProviderName")
     private String location;
 
 
@@ -35,6 +38,7 @@ public class ServiceProviderModel {
     private Set<ServicesModel> services = new HashSet<>();
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "levelId")
+    @Column(name="hospitalLevel")
     private HospitalLevels hospitalLevel;
     @ManyToMany
     @JoinTable(
@@ -42,6 +46,7 @@ public class ServiceProviderModel {
             joinColumns = @JoinColumn(name = "serviceProviderId"),
             inverseJoinColumns = @JoinColumn(name = "premiumLimitId")
     )
+    @Column(name="premiumLimit")
     private  Set<PremiumLimit> premiumLimit = new HashSet<>();
 
 

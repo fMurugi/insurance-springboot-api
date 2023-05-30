@@ -3,29 +3,24 @@ package com.fiona.Limits.controller;
 import com.fiona.Classes.APIResponse;
 import com.fiona.Limits.model.PremiumLimitDTO;
 import com.fiona.Limits.service.LimitsService;
-import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
-import com.fiona.ServiceProviders.Service.ServiceProviderService;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
-@RequestMapping("/api/limits")
+@RequestMapping("/api/v1/limits")
 @Tag(name="premium limits")
+@AllArgsConstructor
 public class PremiumLimitController {
-    @Autowired
     private LimitsService limitsService;
-
     @Operation(
             description = "Get endpoint for premium limits",
             summary = "these are amount to be paid per age bracket",
@@ -42,30 +37,26 @@ public class PremiumLimitController {
     )
 
 //    todo why are we hiding the endpoint create ???? --it was trial  -romoved the @hidden -done
-
-    @PostMapping("/create")
+    @PostMapping("/create_premium_limit")
     public ResponseEntity<APIResponse> createNewLimits(@RequestBody @Valid PremiumLimitDTO payload){
         List<PremiumLimitDTO> premiumLimitDTO = limitsService.createNewPremiumLimit(payload);
-        return buildResponseEntity(HttpStatus.CREATED,premiumLimitDTO,"created successfully","/api/limits/create");
+        return buildResponseEntity(HttpStatus.CREATED,premiumLimitDTO,"created successfully","/api/limits/create_premium_limit");
     }
 
-    @Hidden
-    //update
 //    todo, the HttpStatus for update is invalid. - why?  changed to OK -done
-    @PostMapping("/update")
+    @PostMapping("/update_single_premium_limit")
     public ResponseEntity<APIResponse> updateLimit(@RequestBody PremiumLimitDTO payload){
         List<PremiumLimitDTO> premiumLimitDTOList = limitsService.updateLimit(payload);
         return  buildResponseEntity(HttpStatus.OK,premiumLimitDTOList,"Updated successfully","/api/limits/update");
     }
-    //getALl
-    @GetMapping("/all")
+
+    @GetMapping("/get_all_limits")
     public ResponseEntity<APIResponse> getAllLimits(){
         return  buildResponseEntity(HttpStatus.OK,limitsService.getAllLimits(),"returned All limits","/api/limits/all");
     }
 
-    //delete
     @Hidden
-    @PostMapping("/delete")
+    @PostMapping("/delete_single_limit")
     public ResponseEntity<APIResponse> deleteLimit(@RequestBody PremiumLimitDTO payload){
         return  buildResponseEntity(HttpStatus.OK,limitsService.deleteLimit(payload),"deleted successfully","/api/limits/delete");
     }

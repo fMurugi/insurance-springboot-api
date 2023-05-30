@@ -31,7 +31,7 @@ public class InsuranceTypeController {
      * @return
      */
     // ! todo How do I parametrize the following methods?
-    @PostMapping("/create/insurance_type")
+    @PostMapping("/create_insurance_type")
     public ResponseEntity<APIResponse> createInsuranceType(@RequestBody @Valid InsuranceTypeDTO insuranceTypeDTO){
         String httpStatus = "created";
         String requestUrl = "/api/insuranceType/create";
@@ -40,23 +40,23 @@ public class InsuranceTypeController {
     }
 
 
-    @GetMapping("/fetch/all_insurance_types")
+    @GetMapping("/fetch_all_insurance_types")
     public ResponseEntity<APIResponse> getAllInsuranceTypes(){
        List<InsuranceTypeDTO> insuranceTypeDTOList = insuranceTypeService.getAllInsuranceTypes();
       return buildResponseEntity(HttpStatus.OK,insuranceTypeDTOList,"returned all","/api/insuranceType/all");
     }
 
-    @PostMapping("/update/single_insurance_types")
+    @PostMapping("/update_single_insurance_types")
 //! todo  the implementation of the vaiable payload is commendable. -Done
     public ResponseEntity<APIResponse> updateInsuranceType(@RequestBody InsuranceTypeDTO payload){
         List<InsuranceTypeDTO> insuranceTypeDTOList =  insuranceTypeService.updateInsuranceType(payload);
         return  buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTOList,"update successful","/api/insuranceType/update");
     }
 
-    @PostMapping("/delete/single_insurance_type")
+    @PostMapping("/delete_single_insurance_type")
     public ResponseEntity<APIResponse> deleteInsuranceType(@RequestBody InsuranceTypeDTO payload){
         InsuranceTypeDTO insuranceTypeDTO = insuranceTypeService.deleteInsuranceType(payload);
-        return  buildResponseEntity(HttpStatus.OK,insuranceTypeDTO,"deleted successfuly","api/insuranceType/delete");
+        return  buildResponseEntity(HttpStatus.OK,insuranceTypeDTO,"deleted successfully","api/insuranceType/delete");
     }
 
 
