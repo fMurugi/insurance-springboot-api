@@ -5,15 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//        ! todo  unused imports.
-import lombok.NonNull;
+//        ! todo  unused imports.-done
 //! todo  Create a folder called payloads, then add variables and different constructors to them, so as to improve the flexibility of the class.
-//! todo  WHY do we need @NoArgsConstructor ???
+//! todo  WHY do we need @NoArgsConstructor ??? - done
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class InsuranceTypeDTO {
     private UUID insuranceTypeId;
     @NotBlank(message = "Name cannot be blank/null")
