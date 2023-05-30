@@ -10,6 +10,8 @@ import java.util.UUID;
 @Data
 @Setter
 @Table(name = "data_insuranceType")
+
+// TODO, EXPLICITLY ADD THE COLUMN NAMES. AND ANY OTHER REQUIRED FIELD SUCH AS NOT NULL, ETC.
 public class InsuranceType {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

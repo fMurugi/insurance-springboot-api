@@ -34,6 +34,7 @@ public class ServiceProviderService {
         ServiceProviderModel serviceProviderDbResponse = serviceProvidersRepository.save(serviceProviderModel);
         return  modelMapper.map(serviceProviderDbResponse,ServiceProviderDTO.class);
     }
+//    TODO UNUSED CODE.
     @Transactional
     public ServiceProviderDTO getServiceProviderByName(ServiceProviderDTO serviceProviderDTOReq){
         ServiceProviderModel serviceProviderModel = modelMapper.map(serviceProviderDTOReq, ServiceProviderModel.class);
