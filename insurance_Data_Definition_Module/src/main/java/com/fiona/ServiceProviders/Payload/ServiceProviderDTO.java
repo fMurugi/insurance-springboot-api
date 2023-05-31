@@ -1,4 +1,4 @@
-package com.fiona.ServiceProviders.Model;
+package com.fiona.ServiceProviders.Payload;
 
 import com.fiona.HospitalLevels.model.HospitalLevels;
 import com.fiona.Limits.model.PremiumLimit;

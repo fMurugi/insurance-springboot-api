@@ -1,10 +1,12 @@
 package com.fiona.InsuranceType.Controller;
 
 import com.fiona.Classes.APIResponse;
+import com.fiona.InsuranceType.Model.InsuranceType;
 import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Service.InsuranceTypeService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +46,11 @@ public class InsuranceTypeController {
     public ResponseEntity<APIResponse> getAllInsuranceTypes(){
        List<InsuranceTypeDTO> insuranceTypeDTOList = insuranceTypeService.getAllInsuranceTypes();
       return buildResponseEntity(HttpStatus.OK,insuranceTypeDTOList,"returned all","/api/insuranceType/all");
+    }
+    @GetMapping("/fetch_all_insurance_types/{offset}/{pageSize}")
+    public ResponseEntity<APIResponse> getPaginatedInsuranceType(@PathVariable int offset,@PathVariable int pageSize){
+        Page<InsuranceType> insuranceTypeDTOList = insuranceTypeService.paginate(offset,pageSize);
+        return buildResponseEntity(HttpStatus.OK,insuranceTypeDTOList,"returned all","/api/insuranceType/all");
     }
 
     @PostMapping("/update_single_insurance_types")
