@@ -35,12 +35,7 @@ public class ServiceProviderModel {
     @JoinColumn(name = "levelId")
     @PrimaryKeyJoinColumn
     private HospitalLevels hospitalLevel;
-    @ManyToMany
-    @JoinTable(
-            name="serviceProviderLimits",
-            joinColumns = @JoinColumn(name = "serviceProviderId"),
-            inverseJoinColumns = @JoinColumn(name = "premiumLimitId")
-    )
+    @OneToMany(mappedBy = "serviceProvider",cascade =CascadeType.ALL,orphanRemoval = true )
     @Column(name="premiumLimit")
     private  Set<PremiumLimit> premiumLimit = new HashSet<>();
 

@@ -1,4 +1,4 @@
-package com.fiona.InsuranceType.Model;
+package com.fiona.InsuranceType.Payload;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

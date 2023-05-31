@@ -2,8 +2,9 @@ package com.fiona.InsuranceType.Controller;
 
 import com.fiona.Classes.APIResponse;
 import com.fiona.InsuranceType.Model.InsuranceType;
-import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
+import com.fiona.InsuranceType.Payload.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Service.InsuranceTypeService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -34,37 +35,35 @@ public class InsuranceTypeController {
      */
     // ! todo How do I parametrize the following methods?
     @PostMapping("/create_insurance_type")
-    public ResponseEntity<APIResponse> createInsuranceType(@RequestBody @Valid InsuranceTypeDTO insuranceTypeDTO){
-        String httpStatus = "created";
-        String requestUrl = "/api/insuranceType/create";
+    public ResponseEntity<APIResponse> createInsuranceType(@RequestBody @Valid InsuranceTypeDTO insuranceTypeDTO, HttpServletRequest request){
         InsuranceTypeDTO insuranceTypeDTORes = insuranceTypeService.createInsuranceType(insuranceTypeDTO);
-        return buildResponseEntity(HttpStatus.CREATED, insuranceTypeDTORes, httpStatus, requestUrl);
+        return buildResponseEntity(HttpStatus.CREATED, insuranceTypeDTORes, request.getRequestURI());
     }
-
 
     @GetMapping("/fetch_all_insurance_types")
-    public ResponseEntity<APIResponse> getAllInsuranceTypes(){
+    public ResponseEntity<APIResponse> getAllInsuranceTypes(HttpServletRequest request){
        List<InsuranceTypeDTO> insuranceTypeDTOList = insuranceTypeService.getAllInsuranceTypes();
-      return buildResponseEntity(HttpStatus.OK,insuranceTypeDTOList,"returned all","/api/insuranceType/all");
+      return buildResponseEntity(HttpStatus.OK,insuranceTypeDTOList,request.getRequestURI());
     }
     @GetMapping("/fetch_all_insurance_types/{offset}/{pageSize}")
-    public ResponseEntity<APIResponse> getPaginatedInsuranceType(@PathVariable int offset,@PathVariable int pageSize){
+    public ResponseEntity<APIResponse> getPaginatedInsuranceType(@PathVariable int offset,@PathVariable int pageSize,HttpServletRequest request){
         Page<InsuranceType> insuranceTypeDTOList = insuranceTypeService.paginate(offset,pageSize);
-        return buildResponseEntity(HttpStatus.OK,insuranceTypeDTOList,"returned all","/api/insuranceType/all");
+        return buildResponseEntity(HttpStatus.OK,insuranceTypeDTOList,request.getRequestURI());
     }
 
     @PostMapping("/update_single_insurance_types")
 //! todo  the implementation of the vaiable payload is commendable. -Done
-    public ResponseEntity<APIResponse> updateInsuranceType(@RequestBody InsuranceTypeDTO payload){
+    public ResponseEntity<APIResponse> updateInsuranceType(@RequestBody InsuranceTypeDTO payload,HttpServletRequest request){
         List<InsuranceTypeDTO> insuranceTypeDTOList =  insuranceTypeService.updateInsuranceType(payload);
-        return  buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTOList,"update successful","/api/insuranceType/update");
+        return  buildResponseEntity(HttpStatus.CREATED,insuranceTypeDTOList,request.getRequestURI());
     }
 
     @PostMapping("/delete_single_insurance_type")
-    public ResponseEntity<APIResponse> deleteInsuranceType(@RequestBody InsuranceTypeDTO payload){
+    public ResponseEntity<APIResponse> deleteInsuranceType(@RequestBody InsuranceTypeDTO payload,HttpServletRequest request){
         InsuranceTypeDTO insuranceTypeDTO = insuranceTypeService.deleteInsuranceType(payload);
-        return  buildResponseEntity(HttpStatus.OK,insuranceTypeDTO,"deleted successfully","api/insuranceType/delete");
+        return  buildResponseEntity(HttpStatus.OK,insuranceTypeDTO,request.getRequestURI());
     }
+
 
 
 }

@@ -1,4 +1,4 @@
-package com.fiona.Services.Model;
+package com.fiona.Services.payload;
 
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import jakarta.validation.constraints.NotBlank;

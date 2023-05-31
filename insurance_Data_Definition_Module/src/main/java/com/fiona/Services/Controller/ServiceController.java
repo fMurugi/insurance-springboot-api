@@ -1,8 +1,10 @@
 package com.fiona.Services.Controller;
 
 import com.fiona.Classes.APIResponse;
-import com.fiona.Services.Model.ServicesDTO;
+import com.fiona.Services.payload.ServicesDTO;
 import com.fiona.Services.Service.ServicesService;
+import com.mysql.cj.PreparedQuery;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,28 +26,28 @@ public class ServiceController {
      * @return
      */
     @PostMapping("/create_service")
-    public ResponseEntity<APIResponse> createNewService(@RequestBody @Valid ServicesDTO payload){
+    public ResponseEntity<APIResponse> createNewService(@RequestBody @Valid ServicesDTO payload, HttpServletRequest request){
         ServicesDTO servicesDTO = servicesService.createNewService(payload);
-        return buildResponseEntity(HttpStatus.CREATED,servicesDTO,"created successfully","/api/Services/create_service");
+        return buildResponseEntity(HttpStatus.CREATED,servicesDTO,request.getRequestURI());
     }
 
     //getALl
     @GetMapping("/get_all_services")
-    public ResponseEntity<APIResponse> getAllServices(){
-        return  buildResponseEntity(HttpStatus.OK,servicesService.getAllServices(),"returned All services","/api/Services/get_all_services");
+    public ResponseEntity<APIResponse> getAllServices(HttpServletRequest request){
+        return  buildResponseEntity(HttpStatus.OK,servicesService.getAllServices(),request.getRequestURI());
     }
 
     //update
     @PostMapping("/update_single_service")
-    public ResponseEntity<APIResponse> updateService(@RequestBody ServicesDTO payload){
+    public ResponseEntity<APIResponse> updateService(@RequestBody ServicesDTO payload,HttpServletRequest request){
         List<ServicesDTO> servicesDTOList = servicesService.updateService(payload);
-        return  buildResponseEntity(HttpStatus.ACCEPTED,servicesDTOList,"Updated successfully","/api/Services/update_single_service");
+        return  buildResponseEntity(HttpStatus.ACCEPTED,servicesDTOList,request.getRequestURI());
     }
 
     //delete
     @PostMapping("/delete_single_service")
-    public ResponseEntity<APIResponse> deleteService(@RequestBody ServicesDTO payload){
-        return  buildResponseEntity(HttpStatus.OK,servicesService.deleteService(payload),"deleted successfully","/api/Services/delete_single_service");
+    public ResponseEntity<APIResponse> deleteService(@RequestBody ServicesDTO payload,HttpServletRequest request){
+        return  buildResponseEntity(HttpStatus.OK,servicesService.deleteService(payload),request.getRequestURI());
     }
 
 

@@ -24,7 +24,7 @@ public class PremiumLimit {
     @Column(name="maximumAge")
     @NotBlank
     private Integer maxAge;
-    @ManyToMany(mappedBy = "premiumLimit")
-    @Column(name="serviceProvider")
-    private Set<ServiceProviderModel> serviceProvider;
+    @ManyToOne
+    @JoinColumn(name="serviceProvider")
+    private ServiceProviderModel serviceProvider;
 }
