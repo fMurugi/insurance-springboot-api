@@ -1,7 +1,6 @@
 package com.fiona.Services.Controller;
 
 import com.fiona.Classes.APIResponse;
-import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
 import com.fiona.Services.Model.ServicesDTO;
 import com.fiona.Services.Service.ServicesService;
 import jakarta.validation.Valid;

@@ -1,52 +1,48 @@
 package com.fiona.ServiceProviders.Controller;
 
 import com.fiona.Classes.APIResponse;
-import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
+import com.fiona.ServiceProviders.Payload.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Service.ServiceProviderService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
-@RequestMapping("api/v1/ServiceProviders")
+@RequestMapping("api/v1/service_providers")
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class ServiceProviderController {
-    private String SUCCESS ="success";
-    @Autowired
     private ServiceProviderService serviceProviderService;
 
+
     @PostMapping("/create_service_provider")
-    public ResponseEntity<APIResponse> createNewServiceProvider(@RequestBody @Valid ServiceProviderDTO payload){
+    public ResponseEntity<APIResponse> createNewServiceProvider(@RequestBody @Valid ServiceProviderDTO payload,HttpServletRequest request){
         ServiceProviderDTO serviceProviderDTO = serviceProviderService.createNewServiceProvider(payload);
-        return buildResponseEntity(HttpStatus.CREATED,serviceProviderDTO,"created successfully","/api/ServiceProviders/create_service_provider");
+        return buildResponseEntity(HttpStatus.CREATED,serviceProviderDTO,request.getRequestURI());
     }
 
-
     @PostMapping("/update_single_service_provider")
-    public ResponseEntity<APIResponse> updateServiceProvider(@RequestBody ServiceProviderDTO payload){
+    public ResponseEntity<APIResponse> updateServiceProvider(@RequestBody ServiceProviderDTO payload,HttpServletRequest request){
         List<ServiceProviderDTO> serviceProviderDTO = serviceProviderService.updateServiceProvider(payload);
-        return  buildResponseEntity(HttpStatus.ACCEPTED,serviceProviderDTO,"Updated successfully","/api/ServiceProviders/update_service_provider");
+        return  buildResponseEntity(HttpStatus.ACCEPTED,serviceProviderDTO,request.getRequestURI());
     }
 
     @GetMapping("/get_all_service_providers")
-    public ResponseEntity<APIResponse> getAllServiceProviders(){
-        return  buildResponseEntity(HttpStatus.OK,serviceProviderService.getAllServiceProviders(),"returned All service providers","/api/ServiceProviders/all");
+    public ResponseEntity<APIResponse> getAllServiceProviders(HttpServletRequest request){
+        return  buildResponseEntity(HttpStatus.OK,serviceProviderService.getAllServiceProviders(),request.getRequestURI());
     }
 
     @GetMapping("/get_service_provider_by_name")
-    public ResponseEntity<APIResponse> getServiceProviderByName(@RequestBody ServiceProviderDTO payload){
-        return buildResponseEntity(HttpStatus.OK,serviceProviderService.getServiceProviderByName(payload),"returned service providerr by name","api/ServiceProviders/serviceProvider");
+    public ResponseEntity<APIResponse> getServiceProviderByName(@RequestBody ServiceProviderDTO payload,HttpServletRequest request){
+        return buildResponseEntity(HttpStatus.OK,serviceProviderService.getServiceProviderByName(payload),request.getRequestURI());
 
     }
+
     /**
      * Deletes a single service provider based on the provided payload.
      *
@@ -63,8 +59,10 @@ public class ServiceProviderController {
 
 
     @PostMapping("/delete_single_service_providers")
-    public ResponseEntity<APIResponse> deleteServiceProvider(@RequestBody ServiceProviderDTO payload){
-        return  buildResponseEntity(HttpStatus.OK,serviceProviderService.deleteServiceProvider(payload),"deleted successfully","/api/ServiceProviders/delete_single_service_providers");
+    public ResponseEntity<APIResponse> deleteServiceProvider(@RequestBody ServiceProviderDTO payload,HttpServletRequest request){
+        return  buildResponseEntity(HttpStatus.OK,serviceProviderService.deleteServiceProvider(payload),request.getRequestURI());
     }
+
+
 
 }

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 public class APIResponse<T>{
 
-    private String message;
+//    private String message;
 //    private List<> errors;
     private T body;
     private HttpStatus status;

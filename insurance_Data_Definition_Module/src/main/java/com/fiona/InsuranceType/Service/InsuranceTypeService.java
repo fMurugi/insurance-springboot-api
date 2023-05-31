@@ -5,9 +5,12 @@ import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Model.InsuranceType;
 import com.fiona.InsuranceType.Repository.InsuranceTypeRepository;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +19,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+@AllArgsConstructor
 public class InsuranceTypeService {
-    @Autowired
     private InsuranceTypeRepository insuranceTypeRepository;
-    @Autowired
     private ModelMapper modelMapper;
 
        public InsuranceTypeDTO createInsuranceType(InsuranceTypeDTO insuranceTypeDTORequest) {
@@ -62,6 +64,10 @@ public class InsuranceTypeService {
            return insuranceTypeRepository.findById(id)
                    .orElseThrow(()-> new ResourceNotFoundException("insuranceType with id " + id + "NOT FOUND"));
 
+    }
+    public Page<InsuranceType> paginate(int offset, int pageSize){
+         Page<InsuranceType> insuranceTypes= insuranceTypeRepository.findAll(PageRequest.of(offset,pageSize));
+         return  insuranceTypes;
     }
 
 }

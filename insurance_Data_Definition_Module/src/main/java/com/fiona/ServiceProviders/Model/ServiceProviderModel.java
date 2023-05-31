@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,22 +24,16 @@ public class ServiceProviderModel {
     @Column(name="serviceProviderId")
     @NonNull
     private UUID serviceProviderId;
-    @Column(name="ServiceProviderName")
-    private String name;
     @Column(name="serviceProviderName")
+    private String name;
+    @Column(name="serviceProviderLocation")
     private String location;
 
-
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-            @JoinTable(
-                    name = "serviceProviderService",
-                    joinColumns = @JoinColumn(name = "serviceProviderId"),
-                    inverseJoinColumns = @JoinColumn(name = "serviceId")
-            )
-    private Set<ServicesModel> services = new HashSet<>();
+   @OneToMany(mappedBy="serviceId",cascade = CascadeType.ALL,orphanRemoval=true)
+    private List<ServicesModel> services;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "levelId")
-    @Column(name="hospitalLevel")
+    @PrimaryKeyJoinColumn
     private HospitalLevels hospitalLevel;
     @ManyToMany
     @JoinTable(

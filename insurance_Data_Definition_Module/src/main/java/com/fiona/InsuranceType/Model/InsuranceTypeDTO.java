@@ -18,4 +18,6 @@ public class InsuranceTypeDTO {
     private String name;
     @NotBlank(message = "description cannot be null/blank")
     private String description;
+    private int offset;
+    private int pageSize;
 }

@@ -1,13 +1,12 @@
 package com.fiona.ServiceProviders.Service;
 
 import com.fiona.Exceptions.ResourceNotFoundException;
-import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
+import com.fiona.ServiceProviders.Payload.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.ServiceProviders.Repository.ServiceProvidersRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
@@ -37,7 +36,7 @@ public class ServiceProviderService {
 
     @Transactional
     public List<ServiceProviderDTO> updateServiceProvider(ServiceProviderDTO data){
-        ServiceProviderModel serviceProvider = findServiceProviderById(data.getServiceProviderId());
+        ServiceProviderModel serviceProvider =findServiceProviderById(data.getServiceProviderId());
         serviceProvider.setName(data.getName());
         serviceProvider.setLocation(data.getLocation());
         return getAllServiceProviders();
@@ -49,13 +48,12 @@ public class ServiceProviderService {
         return getAllServiceProviders();
     }
 
-    public ServiceProviderModel findServiceProviderById(UUID id){
-        return  serviceProvidersRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("service provider with id " + id + "not found"));
-    }
-
-
     public ServiceProviderDTO getServiceProviderByName(ServiceProviderDTO data) {
         return  modelMapper.map(serviceProvidersRepository.findByName(data.getName()),ServiceProviderDTO.class);
+    }
+    public ServiceProviderModel findServiceProviderById(UUID id){
+        return serviceProvidersRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Service Provider does not exist"));
+
     }
 }

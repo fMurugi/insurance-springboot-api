@@ -1,15 +1,11 @@
 package com.fiona.Services.Service;
 
 import com.fiona.Exceptions.ResourceNotFoundException;
-import com.fiona.ServiceProviders.Model.ServiceProviderDTO;
-import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.Services.Model.ServicesDTO;
 import com.fiona.Services.Model.ServicesModel;
 import com.fiona.Services.Repository.ServiceRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

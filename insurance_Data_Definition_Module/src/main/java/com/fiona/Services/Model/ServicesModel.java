@@ -22,8 +22,8 @@ public class ServicesModel {
     private UUID serviceId;
     @Column(unique = true,name="serviceName")
     private String name;
-    @ManyToMany(mappedBy="services",fetch = FetchType.LAZY,cascade = { CascadeType.ALL })
-    private Set<ServiceProviderModel> serviceProviders=new HashSet<>();
-
+    @ManyToOne
+    @JoinColumn(name="serviceProviderId")
+    private ServiceProviderModel serviceProviderModel;
 
 }
