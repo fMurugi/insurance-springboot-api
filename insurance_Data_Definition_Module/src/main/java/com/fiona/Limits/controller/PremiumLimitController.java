@@ -40,25 +40,25 @@ public class PremiumLimitController {
     @PostMapping("/create_premium_limit")
     public ResponseEntity<APIResponse> createNewLimits(@RequestBody @Valid PremiumLimitDTO payload){
         List<PremiumLimitDTO> premiumLimitDTO = limitsService.createNewPremiumLimit(payload);
-        return buildResponseEntity(HttpStatus.CREATED,premiumLimitDTO,"created successfully","/api/limits/create_premium_limit");
+        return buildResponseEntity(HttpStatus.CREATED,premiumLimitDTO,"/api/limits/create_premium_limit");
     }
 
 //    todo, the HttpStatus for update is invalid. - why?  changed to OK -done
     @PostMapping("/update_single_premium_limit")
     public ResponseEntity<APIResponse> updateLimit(@RequestBody PremiumLimitDTO payload){
         List<PremiumLimitDTO> premiumLimitDTOList = limitsService.updateLimit(payload);
-        return  buildResponseEntity(HttpStatus.OK,premiumLimitDTOList,"Updated successfully","/api/limits/update");
+        return  buildResponseEntity(HttpStatus.OK,premiumLimitDTOList,"/api/limits/update");
     }
 
     @GetMapping("/get_all_limits")
     public ResponseEntity<APIResponse> getAllLimits(){
-        return  buildResponseEntity(HttpStatus.OK,limitsService.getAllLimits(),"returned All limits","/api/limits/all");
+        return  buildResponseEntity(HttpStatus.OK,limitsService.getAllLimits(),"/api/limits/all");
     }
 
     @Hidden
     @PostMapping("/delete_single_limit")
     public ResponseEntity<APIResponse> deleteLimit(@RequestBody PremiumLimitDTO payload){
-        return  buildResponseEntity(HttpStatus.OK,limitsService.deleteLimit(payload),"deleted successfully","/api/limits/delete");
+        return  buildResponseEntity(HttpStatus.OK,limitsService.deleteLimit(payload),"/api/limits/delete");
     }
 
 }

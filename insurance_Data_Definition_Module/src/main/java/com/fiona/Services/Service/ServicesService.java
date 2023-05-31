@@ -1,7 +1,7 @@
 package com.fiona.Services.Service;
 
 import com.fiona.Exceptions.ResourceNotFoundException;
-import com.fiona.Services.Model.ServicesDTO;
+import com.fiona.Services.payload.ServicesDTO;
 import com.fiona.Services.Model.ServicesModel;
 import com.fiona.Services.Repository.ServiceRepository;
 import jakarta.transaction.Transactional;
