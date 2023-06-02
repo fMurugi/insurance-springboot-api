@@ -4,11 +4,13 @@ import com.fiona.Exceptions.ResourceNotFoundException;
 import com.fiona.ServiceProviders.Payload.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.ServiceProviders.Repository.ServiceProvidersRepository;
+import com.fiona.Services.Model.ServicesModel;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -28,10 +30,12 @@ public class ServiceProviderService {
     public List<ServiceProviderDTO> getAllServiceProviders(){
         List<ServiceProviderModel> serviceProvidersList= serviceProvidersRepository.findAll();
 
-        List<ServiceProviderDTO> serviceProviderDtoList = serviceProvidersList.stream()
-                .map(serviceProvider -> modelMapper.map(serviceProvider, ServiceProviderDTO.class))
+        return serviceProvidersList.stream()
+                .map(serviceProvider -> {
+                    ServiceProviderDTO serviceProviderDTO = modelMapper.map(serviceProvider, ServiceProviderDTO.class);
+                    return serviceProviderDTO;
+                })
                 .collect(Collectors.toList());
-        return serviceProviderDtoList;
     }
 
     @Transactional

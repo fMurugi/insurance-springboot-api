@@ -36,7 +36,7 @@ public class ServiceProviderController {
         return  buildResponseEntity(HttpStatus.OK,serviceProviderService.getAllServiceProviders(),request.getRequestURI());
     }
 
-    @GetMapping("/get_service_provider_by_name")
+    @PostMapping("/get_service_provider_by_name")
     public ResponseEntity<APIResponse> getServiceProviderByName(@RequestBody ServiceProviderDTO payload,HttpServletRequest request){
         return buildResponseEntity(HttpStatus.OK,serviceProviderService.getServiceProviderByName(payload),request.getRequestURI());
 

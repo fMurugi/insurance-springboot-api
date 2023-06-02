@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
@@ -47,6 +48,10 @@ public class ServiceController {
         return  buildResponseEntity(HttpStatus.OK,servicesService.deleteService(payload),request.getRequestURI());
     }
 
+    @PostMapping("/fetch_services_by_service_provider")
+    public ResponseEntity<APIResponse> getServicesByServiceProviderId(@RequestBody ServicesDTO payload, HttpServletRequest request){
+        return  buildResponseEntity(HttpStatus.OK,servicesService.getServicesByServiceProviderId(payload),request.getRequestURI());
+    }
 
 
 }
