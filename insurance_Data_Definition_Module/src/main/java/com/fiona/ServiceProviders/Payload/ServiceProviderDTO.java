@@ -2,14 +2,13 @@ package com.fiona.ServiceProviders.Payload;
 
 import com.fiona.HospitalLevels.model.HospitalLevels;
 import com.fiona.Limits.model.PremiumLimit;
-import com.fiona.Services.Model.ServicesModel;
+import com.fiona.Services.payload.ServicesDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -21,8 +20,6 @@ public class ServiceProviderDTO {
     private String name;
     @NotBlank(message = "location cannot be BLANK")
     private String location;
-    private HospitalLevels hospitalLevel;
-    private Set<ServicesModel> services=new HashSet<>();
-    private  Set<PremiumLimit> premiumLimit;
+
 
 }

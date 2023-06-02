@@ -22,7 +22,6 @@ public class ServiceProviderModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="serviceProviderId")
-    @NonNull
     private UUID serviceProviderId;
     @Column(name="serviceProviderName")
     private String name;
@@ -37,7 +36,7 @@ public class ServiceProviderModel {
     private HospitalLevels hospitalLevel;
     @OneToMany(mappedBy = "serviceProvider",cascade =CascadeType.ALL,orphanRemoval = true )
     @Column(name="premiumLimit")
-    private  Set<PremiumLimit> premiumLimit = new HashSet<>();
+    private  List<PremiumLimit> premiumLimit ;
 
 
 }

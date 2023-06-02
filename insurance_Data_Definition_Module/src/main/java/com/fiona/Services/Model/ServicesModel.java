@@ -20,10 +20,10 @@ public class ServicesModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="serviceId")
     private UUID serviceId;
-    @Column(unique = true,name="serviceName")
+    @Column(name="serviceName")
     private String name;
     @ManyToOne
     @JoinColumn(name="serviceProviderId")
-    private ServiceProviderModel serviceProviderModel;
+    private ServiceProviderModel serviceProviderId;
 
 }
