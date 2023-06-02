@@ -31,20 +31,17 @@ public class ServiceController {
         return buildResponseEntity(HttpStatus.CREATED,servicesDTO,request.getRequestURI());
     }
 
-    //getALl
     @GetMapping("/get_all_services")
     public ResponseEntity<APIResponse> getAllServices(HttpServletRequest request){
         return  buildResponseEntity(HttpStatus.OK,servicesService.getAllServices(),request.getRequestURI());
     }
 
-    //update
     @PostMapping("/update_single_service")
     public ResponseEntity<APIResponse> updateService(@RequestBody ServicesDTO payload,HttpServletRequest request){
         List<ServicesDTO> servicesDTOList = servicesService.updateService(payload);
         return  buildResponseEntity(HttpStatus.ACCEPTED,servicesDTOList,request.getRequestURI());
     }
 
-    //delete
     @PostMapping("/delete_single_service")
     public ResponseEntity<APIResponse> deleteService(@RequestBody ServicesDTO payload,HttpServletRequest request){
         return  buildResponseEntity(HttpStatus.OK,servicesService.deleteService(payload),request.getRequestURI());
