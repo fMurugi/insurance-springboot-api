@@ -19,7 +19,6 @@ import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 public class ServiceProviderController {
     private ServiceProviderService serviceProviderService;
 
-
     @PostMapping("/create_service_provider")
     public ResponseEntity<APIResponse> createNewServiceProvider(@RequestBody @Valid ServiceProviderDTO payload,HttpServletRequest request){
         ServiceProviderDTO serviceProviderDTO = serviceProviderService.createNewServiceProvider(payload);

@@ -55,7 +55,6 @@ public class PremiumLimitController {
         return  buildResponseEntity(HttpStatus.OK,limitsService.getAllLimits(),"/api/limits/all");
     }
 
-    @Hidden
     @PostMapping("/delete_single_limit")
     public ResponseEntity<APIResponse> deleteLimit(@RequestBody PremiumLimitDTO payload){
         return  buildResponseEntity(HttpStatus.OK,limitsService.deleteLimit(payload),"/api/limits/delete");
