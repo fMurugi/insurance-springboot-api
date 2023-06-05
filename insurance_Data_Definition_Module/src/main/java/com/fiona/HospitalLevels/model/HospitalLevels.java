@@ -16,9 +16,9 @@ public class HospitalLevels {
     @Column(name="levelId")
     @NonNull
     private UUID levelId;
-    @Column(name="NotBlank")
+    @Column(name="levelName")
     private String name;
-    @OneToOne(mappedBy = "hospitalLevel")
+    @OneToMany(mappedBy = "hospitalLevel")
     private ServiceProviderModel serviceProvider;
 
 }
