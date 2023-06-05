@@ -5,7 +5,6 @@ import com.fiona.InsuranceType.Model.InsuranceType;
 import com.fiona.InsuranceType.Payload.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Service.InsuranceTypeService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 //        ! todo  ADD THE VERSION OF THE ENDPOINT BEING USED. I.E (api/v1/insurance_type) -Done
 //        ! todo  USE THE FOLLOWING CONVENTIONS TO CREATE YOUR ENDPOINT URLS  (create_????, fetch_all_???, fetch_single_????, update_single_?? delete_single_???) - Done
 
-@RequestMapping("/api/v1/insurance_type")
+@RequestMapping("/api/v1/data_definition/insurance_type")
 @AllArgsConstructor
 public class InsuranceTypeController {
     private InsuranceTypeService insuranceTypeService;
@@ -35,7 +34,7 @@ public class InsuranceTypeController {
      */
     // ! todo How do I parametrize the following methods?
     @PostMapping("/create_insurance_type")
-    public ResponseEntity<APIResponse> createInsuranceType(@RequestBody @Valid InsuranceTypeDTO insuranceTypeDTO, HttpServletRequest request){
+    public ResponseEntity<APIResponse> createInsuranceType(@RequestBody  InsuranceTypeDTO insuranceTypeDTO, HttpServletRequest request){
         InsuranceTypeDTO insuranceTypeDTORes = insuranceTypeService.createInsuranceType(insuranceTypeDTO);
         return buildResponseEntity(HttpStatus.CREATED, insuranceTypeDTORes, request.getRequestURI());
     }

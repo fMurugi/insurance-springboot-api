@@ -6,7 +6,6 @@ import com.fiona.ServiceProviders.Repository.ServiceProvidersRepository;
 import com.fiona.Services.payload.ServicesDTO;
 import com.fiona.Services.Model.ServicesModel;
 import com.fiona.Services.Repository.ServiceRepository;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ public class ServicesService {
     private ModelMapper modelMapper;
     private ServiceProvidersRepository serviceProvidersRepository;
 
-    @Transactional
     public ServicesDTO createNewService(ServicesDTO servicesDTORequest){
        ServicesModel services=serviceRepository.save((modelMapper.map(servicesDTORequest, ServicesModel.class)));
 
@@ -45,14 +43,12 @@ public class ServicesService {
      * @param data
      * @return list of ServicesDTO
      */
-    @Transactional
     public List<ServicesDTO> updateService(ServicesDTO data){
         ServicesModel servicesModel = findServiceById(data.getServiceId());
         servicesModel.setName(data.getName());
         return getAllServices();
     }
 
-    @Transactional
     public List<ServicesDTO> deleteService(ServicesDTO data){
         ServicesModel servicesModel = findServiceById(data.getServiceId());
         serviceRepository.delete(servicesModel);

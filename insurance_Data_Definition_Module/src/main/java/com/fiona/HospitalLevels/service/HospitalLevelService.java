@@ -6,7 +6,6 @@ import com.fiona.HospitalLevels.payload.HospitalLevelDTO;
 import com.fiona.HospitalLevels.repository.HospitalLevelsRepository;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.ServiceProviders.Payload.ServiceProviderDTO;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,6 @@ public class HospitalLevelService {
                 })
                 .collect(Collectors.toList());
     }
-    @Transactional
     public List<HospitalLevelDTO> updateHospitalLevels(HospitalLevelDTO data){
         HospitalLevels hospitalLevels =findHospitalLevelById(data.getLevelId());
         hospitalLevels.setName(data.getName());

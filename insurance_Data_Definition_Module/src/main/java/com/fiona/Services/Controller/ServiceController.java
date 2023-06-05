@@ -3,9 +3,7 @@ package com.fiona.Services.Controller;
 import com.fiona.Classes.APIResponse;
 import com.fiona.Services.payload.ServicesDTO;
 import com.fiona.Services.Service.ServicesService;
-import com.mysql.cj.PreparedQuery;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +16,7 @@ import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/Services")
+@RequestMapping("/api/v1/data_definition/Services")
 public class ServiceController {
     private ServicesService servicesService;
 
@@ -27,7 +25,7 @@ public class ServiceController {
      * @return
      */
     @PostMapping("/create_service")
-    public ResponseEntity<APIResponse> createNewService(@RequestBody @Valid ServicesDTO payload, HttpServletRequest request){
+    public ResponseEntity<APIResponse> createNewService(@RequestBody  ServicesDTO payload, HttpServletRequest request){
         ServicesDTO servicesDTO = servicesService.createNewService(payload);
         return buildResponseEntity(HttpStatus.CREATED,servicesDTO,request.getRequestURI());
     }

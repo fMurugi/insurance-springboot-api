@@ -6,9 +6,7 @@ import com.fiona.Services.Model.ServicesModel;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -20,7 +18,7 @@ import java.util.UUID;
 @Table(name="data_service_provider")
 public class ServiceProviderModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name="serviceProviderId")
     private UUID serviceProviderId;
     @Column(name="serviceProviderName")

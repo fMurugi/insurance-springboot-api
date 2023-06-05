@@ -6,7 +6,6 @@ import com.fiona.Limits.service.LimitsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ import java.util.List;
 import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
-@RequestMapping("/api/v1/limits")
+@RequestMapping("/api/v1/data_definition/limits")
 @Tag(name="premium limits")
 @AllArgsConstructor
 public class PremiumLimitController {
@@ -37,7 +36,7 @@ public class PremiumLimitController {
 
 //    todo why are we hiding the endpoint create ???? --it was trial  -romoved the @hidden -done
     @PostMapping("/create_premium_limit")
-    public ResponseEntity<APIResponse> createNewLimits(@RequestBody @Valid PremiumLimitDTO payload){
+    public ResponseEntity<APIResponse> createNewLimits(@RequestBody  PremiumLimitDTO payload){
         List<PremiumLimitDTO> premiumLimitDTO = limitsService.createNewPremiumLimit(payload);
         return buildResponseEntity(HttpStatus.CREATED,premiumLimitDTO,"/api/limits/create_premium_limit");
     }
