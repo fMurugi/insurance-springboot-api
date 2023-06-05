@@ -32,8 +32,8 @@ public class ServiceProviderModel {
     @ManyToOne
     @JoinColumn(name = "levelId")
     private HospitalLevels levelId;
-    @OneToMany(mappedBy = "serviceProvider",cascade =CascadeType.ALL,orphanRemoval = true )
-    @Column(name="premiumLimit")
+    @OneToMany(mappedBy = "premiumLimitId",cascade =CascadeType.ALL,orphanRemoval = true )
+    @Column(name="premiumLimitId")
     private  List<PremiumLimit> premiumLimit ;
 
 

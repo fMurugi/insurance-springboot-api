@@ -2,7 +2,7 @@ package com.fiona.Limits.service;
 
 import com.fiona.Exceptions.ResourceNotFoundException;
 import com.fiona.Limits.model.PremiumLimit;
-import com.fiona.Limits.model.PremiumLimitDTO;
+import com.fiona.Limits.Payload.PremiumLimitDTO;
 import com.fiona.Limits.repository.PremiumLimitRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -34,8 +34,8 @@ public class LimitsService {
 
     public List<PremiumLimitDTO> updateLimit(PremiumLimitDTO data){
         PremiumLimit premiumLimit = findPremiumLimitById(data.getPremiumLimitId());
-        premiumLimit.setMinAge(data.getMinAge());
-        premiumLimit.setMaxAge(data.getMaxAge());
+        premiumLimit.setMaximumAge(data.getMinimumAge());
+        premiumLimit.setMaximumAge(data.getMaximumAge());
         return getAllLimits();
     }
 

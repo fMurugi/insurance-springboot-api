@@ -41,6 +41,4 @@ public class HospitalLevelController {
     public ResponseEntity<APIResponse> deleteHospitalLevel(@RequestBody HospitalLevelDTO payload,HttpServletRequest request){
         return  buildResponseEntity(HttpStatus.OK,hospitalLevelService.deleteHospitalLevel(payload),request.getRequestURI());
     }
-
-
 }
