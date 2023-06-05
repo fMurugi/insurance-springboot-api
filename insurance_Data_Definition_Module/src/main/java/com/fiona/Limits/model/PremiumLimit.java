@@ -23,10 +23,8 @@ public class PremiumLimit {
     @Column(name="premiumLimitId")
     private UUID premiumLimitId;
     @Column(name="minimumAge")
-    @NotBlank
     private Integer minimumAge;
     @Column(name="maximumAge")
-    @NotBlank
     private Integer maximumAge;
     @Column(name = "premium")
     private Integer premium;
