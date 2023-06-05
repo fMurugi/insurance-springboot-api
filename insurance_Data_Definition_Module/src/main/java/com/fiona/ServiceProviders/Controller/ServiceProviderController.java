@@ -9,18 +9,20 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
 import java.util.List;
 import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
-@RequestMapping("api/v1/service_providers")
+@RequestMapping("api/v1/data_definition/service_providers")
 @AllArgsConstructor
 
 public class ServiceProviderController {
     private ServiceProviderService serviceProviderService;
 
     @PostMapping("/create_service_provider")
-    public ResponseEntity<APIResponse> createNewServiceProvider(@RequestBody @Valid ServiceProviderDTO payload,HttpServletRequest request){
+    public ResponseEntity<APIResponse> createNewServiceProvider(@RequestBody @Valid ServiceProviderDTO payload, HttpServletRequest request){
         ServiceProviderDTO serviceProviderDTO = serviceProviderService.createNewServiceProvider(payload);
         return buildResponseEntity(HttpStatus.CREATED,serviceProviderDTO,request.getRequestURI());
     }

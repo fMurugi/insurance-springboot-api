@@ -1,14 +1,15 @@
 package com.fiona.HospitalLevels.model;
 //        ! todo  KINDLY ADD THE FILE, TO A FOLDER STSTING EHAT IT IS SUPPOSED TO DO, i.e repository,model,service e.t.c -dont understand this
+
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import java.util.List;
 import java.util.UUID;
+
 
 @Entity
 @Data

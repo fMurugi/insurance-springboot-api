@@ -5,7 +5,6 @@ import com.fiona.HospitalLevels.payload.HospitalLevelDTO;
 import com.fiona.HospitalLevels.service.HospitalLevelService;
 import com.fiona.ServiceProviders.Payload.ServiceProviderDTO;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import static com.fiona.utilities.ApiResponseBuilder.buildResponseEntity;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/hospital_levels")
+@RequestMapping("/api/v1/data_definition/hospital_levels")
 public class HospitalLevelController {
     private final HospitalLevelService hospitalLevelService;
 

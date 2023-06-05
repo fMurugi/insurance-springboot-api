@@ -6,7 +6,6 @@ import com.fiona.Services.payload.ServicesDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.List;
 import java.util.UUID;
