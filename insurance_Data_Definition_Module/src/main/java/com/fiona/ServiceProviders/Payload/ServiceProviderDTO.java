@@ -16,10 +16,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ServiceProviderDTO {
     private UUID serviceProviderId;
-    @NotBlank(message = "name cannot be BLANK")
     private String name;
-    @NotBlank(message = "location cannot be BLANK")
     private String location;
+    private UUID levelId;
 
 
 }

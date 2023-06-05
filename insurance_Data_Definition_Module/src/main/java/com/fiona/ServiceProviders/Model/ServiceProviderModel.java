@@ -27,12 +27,11 @@ public class ServiceProviderModel {
     private String name;
     @Column(name="serviceProviderLocation")
     private String location;
-
    @OneToMany(mappedBy="serviceId",cascade = CascadeType.ALL,orphanRemoval=true)
     private List<ServicesModel> services;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "levelId")
-    private HospitalLevels hospitalLevel;
+    private HospitalLevels levelId;
     @OneToMany(mappedBy = "serviceProvider",cascade =CascadeType.ALL,orphanRemoval = true )
     @Column(name="premiumLimit")
     private  List<PremiumLimit> premiumLimit ;
