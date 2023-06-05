@@ -1,9 +1,8 @@
 package com.fiona.Limits.controller;
 
 import com.fiona.Classes.APIResponse;
-import com.fiona.Limits.model.PremiumLimitDTO;
+import com.fiona.Limits.Payload.PremiumLimitDTO;
 import com.fiona.Limits.service.LimitsService;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

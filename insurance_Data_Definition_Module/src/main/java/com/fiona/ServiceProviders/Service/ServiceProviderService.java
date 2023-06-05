@@ -1,10 +1,12 @@
 package com.fiona.ServiceProviders.Service;
 
 import com.fiona.Exceptions.ResourceNotFoundException;
+import com.fiona.HospitalLevels.payload.HospitalLevelDTO;
 import com.fiona.ServiceProviders.Payload.ServiceProviderDTO;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import com.fiona.ServiceProviders.Repository.ServiceProvidersRepository;
 import com.fiona.Services.Model.ServicesModel;
+import com.fiona.Services.payload.ServicesDTO;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -55,6 +57,18 @@ public class ServiceProviderService {
     public ServiceProviderDTO getServiceProviderByName(ServiceProviderDTO data) {
         return  modelMapper.map(serviceProvidersRepository.findByName(data.getName()),ServiceProviderDTO.class);
     }
+
+//    public List<HospitalLevelDTO> getHospitalsByLevelId(HospitalLevelDTO servicesDTO) {
+//        UUID serviceProviderId = servicesDTO.getServiceProviderId();
+//        ServiceProviderModel serviceProvider = serviceProvidersRepository.findById(serviceProviderId)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid serviceProviderId: " + serviceProviderId));
+//
+//        List<ServicesModel> services = serviceRepository.findServiceByServiceProviderId(serviceProvider);
+//
+//        return services.stream()
+//                .map(service -> modelMapper.map(service, ServicesDTO.class))
+//                .collect(Collectors.toList());
+//    }
     public ServiceProviderModel findServiceProviderById(UUID id){
         return serviceProvidersRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Service Provider does not exist"));
