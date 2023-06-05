@@ -1,0 +1,26 @@
+eureka:
+  client:
+    register-with-eureka: false
+
+server:
+  port: 8222
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+      routes:
+        - id: data_definition_service
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v1/data_definition/**
+        - id: premium_calculations_service
+          uri: http://localHost:8070
+          predicates:
+            - Path=/api/v1/premium_calculations/**
+
