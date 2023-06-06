@@ -59,6 +59,8 @@ public class ServiceProviderService {
         return  modelMapper.map(serviceProvidersRepository.findByName(data.getName()),ServiceProviderDTO.class);
     }
 
+//    TODO -Add getAll hospitals of certain level
+
 //    public List<HospitalLevelDTO> getHospitalsByLevelId(HospitalLevelDTO servicesDTO) {
 //        UUID serviceProviderId = servicesDTO.getServiceProviderId();
 //        ServiceProviderModel serviceProvider = serviceProvidersRepository.findById(serviceProviderId)
