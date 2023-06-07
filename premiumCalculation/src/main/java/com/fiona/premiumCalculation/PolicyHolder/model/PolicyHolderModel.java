@@ -2,6 +2,7 @@ package com.fiona.premiumCalculation.PolicyHolder.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class PolicyHolderModel {
     private Integer age;
     private Integer phoneNumber;
     @OneToMany(mappedBy = "policyHolderId",cascade =CascadeType.ALL,orphanRemoval = true)
-    @JsonIgnore
+    @JsonManagedReference
     private List<DependentsModel> dependents;
 
 }
