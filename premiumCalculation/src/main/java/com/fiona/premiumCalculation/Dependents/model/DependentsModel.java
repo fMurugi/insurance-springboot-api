@@ -19,15 +19,21 @@ import java.util.UUID;
 public class DependentsModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="dependentId")
     private UUID dependentId;
+    @Column(name="firstName")
     private String firstName;
+    @Column(name="lastName")
     private String lastName;
-    private Integer Age;
+    @Column(name="age")
+    private Integer age;
+    @Column(name="hasChronicDisease")
+    private Boolean hasChronicDisease;
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn(name="policyHolderId")
     @JsonBackReference
     private PolicyHolderModel policyHolderId;
-//    -TODO add chronic disease
+//    -TODO add chronic disease -done
 //    -TODO add validations eg phone number
 
 
