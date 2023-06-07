@@ -26,7 +26,7 @@ public class PolicyHolderDTO {
     @Max(value = 60, message = "policy holder cannot be older than 60")
     private Integer age;
     @ValidatePhoneNumber
-    private Integer phoneNumber;
+    private String phoneNumber;
     private List<DependentsModel> dependents;
 
 }
