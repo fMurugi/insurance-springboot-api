@@ -1,22 +1,23 @@
 package com.fiona.InsuranceType.Service;
 
 import com.fiona.Exceptions.ResourceNotFoundException;
-import com.fiona.InsuranceType.Model.InsuranceTypeDTO;
+import com.fiona.InsuranceType.Payload.InsuranceTypeDTO;
 import com.fiona.InsuranceType.Model.InsuranceType;
 import com.fiona.InsuranceType.Repository.InsuranceTypeRepository;
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class InsuranceTypeService {
-    @Autowired
     private InsuranceTypeRepository insuranceTypeRepository;
-    @Autowired
     private ModelMapper modelMapper;
 
        public InsuranceTypeDTO createInsuranceType(InsuranceTypeDTO insuranceTypeDTORequest) {
@@ -36,25 +37,32 @@ public class InsuranceTypeService {
          return insuranceTypeDTOList;
     }
 
-    //! todo  Use @ transactional pattern to run updates.
-//! todo  send data to the services in the form of a variable called data, so that we can know where the variable was initially added.
-    public List<InsuranceTypeDTO> updateInsuranceType(InsuranceTypeDTO insuranceTypeDTOReq){
+    //! todo  Use @ transactional pattern to run updates. -done
+//! todo  send data to the services in the form of a variable called data, so that we can know where the variable was initially added. -done
+    public List<InsuranceTypeDTO> updateInsuranceType(InsuranceTypeDTO data){
 
-//         todo CODE DUPLICATION, KINDLY REFACTOR AS IT IS SIMILAR TO THE CODE IN THE DELETE SECTION WHEN FINDING DATA BY ID.
-        //         todo  YOU CAN CREATE A METHOD THAT JUST FETCHES THE DATA GIVEN ID.
+//         todo CODE DUPLICATION, KINDLY REFACTOR AS IT IS SIMILAR TO THE CODE IN THE DELETE SECTION WHEN FINDING DATA BY ID. -done
+        //         todo  YOU CAN CREATE A METHOD THAT JUST FETCHES THE DATA GIVEN ID. -done
         
-        InsuranceType insuranceType = insuranceTypeRepository.findById(insuranceTypeDTOReq.getInsuranceTypeId())
-                .orElseThrow(() -> new ResourceNotFoundException("insuranceType with id " + insuranceTypeDTOReq.getInsuranceTypeId() + " not found"));
-
-        insuranceType.setName(insuranceTypeDTOReq.getName());
-        insuranceType.setDescription(insuranceTypeDTOReq.getDescription());
+        InsuranceType insuranceType = findInsuranceTypeById(data.getInsuranceTypeId());
+        insuranceType.setName(data.getName());
+        insuranceType.setDescription(data.getDescription());
         return getAllInsuranceTypes();
     }
-    public InsuranceTypeDTO deleteInsuranceType(InsuranceTypeDTO insuranceTypeDTO){
-        InsuranceType insuranceType = insuranceTypeRepository.findById(insuranceTypeDTO.getInsuranceTypeId())
-                .orElseThrow(() -> new ResourceNotFoundException("insuranceType with id " + insuranceTypeDTO.getInsuranceTypeId() + " not found"));
+    public InsuranceTypeDTO deleteInsuranceType(InsuranceTypeDTO data){
+        InsuranceType insuranceType = findInsuranceTypeById(data.getInsuranceTypeId());
          insuranceTypeRepository.delete(insuranceType);
         return modelMapper.map(insuranceType, InsuranceTypeDTO.class);
+    }
+
+    public InsuranceType findInsuranceTypeById(UUID id){
+           return insuranceTypeRepository.findById(id)
+                   .orElseThrow(()-> new ResourceNotFoundException("insuranceType with id " + id + "NOT FOUND"));
+
+    }
+    public Page<InsuranceType> paginate(int offset, int pageSize){
+         Page<InsuranceType> insuranceTypes= insuranceTypeRepository.findAll(PageRequest.of(offset,pageSize));
+         return  insuranceTypes;
     }
 
 }

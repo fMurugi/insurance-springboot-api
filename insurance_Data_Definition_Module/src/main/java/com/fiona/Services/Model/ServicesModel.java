@@ -1,14 +1,9 @@
 package com.fiona.Services.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.validator.constraints.CodePointLength;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -20,14 +15,13 @@ import java.util.UUID;
 @Table(name="data_services")
 public class ServicesModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="serviceId")
     private UUID serviceId;
-    @Column(unique = true)
+    @Column(name="serviceName")
     private String name;
-
-    @ManyToMany(mappedBy="services",fetch = FetchType.LAZY,cascade = { CascadeType.ALL })
-    @JsonIgnore
-    private Set<ServiceProviderModel> serviceProviders=new HashSet<>();
-
+    @ManyToOne
+    @JoinColumn(name="serviceProviderId")
+    private ServiceProviderModel serviceProviderId;
 
 }
