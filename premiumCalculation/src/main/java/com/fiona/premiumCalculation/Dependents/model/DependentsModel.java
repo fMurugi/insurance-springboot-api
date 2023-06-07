@@ -1,5 +1,6 @@
 package com.fiona.premiumCalculation.Dependents.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fiona.premiumCalculation.PolicyHolder.model.PolicyHolderModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,9 +21,13 @@ public class DependentsModel {
     private String firstName;
     private String lastName;
     private Integer Age;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn(name="policyHolderId")
+    @JsonIgnore
     private PolicyHolderModel policyHolderId;
+//    -TODO add chronic disease
+//    -TODO add validations eg phone number
+
 
 //    private enum relateToPolicyHolder;
 

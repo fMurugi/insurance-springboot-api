@@ -1,6 +1,7 @@
 package com.fiona.premiumCalculation.PolicyHolder.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,8 @@ public class PolicyHolderModel {
     private String lastName;
     private Integer age;
     private Integer phoneNumber;
-    @OneToMany(mappedBy = "dependentId",cascade =CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "policyHolderId",cascade =CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnore
     private List<DependentsModel> dependents;
 
 }
