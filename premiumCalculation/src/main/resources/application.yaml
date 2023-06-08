@@ -8,12 +8,13 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
 
+
 server:
   port: 8070
 
 spring:
   application:
-    name: premiumCalculation
+    name: premiumCalculations
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${dbUrl}
@@ -24,3 +25,6 @@ spring:
       ddl-auto: update
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
+  mvc:
+    throw-exception-if-no-handler-found: true
+

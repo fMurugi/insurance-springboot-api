@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,8 +23,10 @@ public class PolicyHolderModel {
     private String firstName;
     private String lastName;
     private Integer age;
-    private Integer phoneNumber;
-    @OneToMany(mappedBy = "dependentId",cascade =CascadeType.ALL,orphanRemoval = true)
+    private String phoneNumber;
+    private Boolean hasChronicDisease;
+    @OneToMany(mappedBy = "policyHolderId",cascade =CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference
     private List<DependentsModel> dependents;
 
 }
