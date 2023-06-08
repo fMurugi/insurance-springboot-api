@@ -1,5 +1,6 @@
 package com.fiona.Services.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,8 +21,9 @@ public class ServicesModel {
     private UUID serviceId;
     @Column(name="serviceName")
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn(name="serviceProviderId")
+    @JsonBackReference
     private ServiceProviderModel serviceProviderId;
 
 }
