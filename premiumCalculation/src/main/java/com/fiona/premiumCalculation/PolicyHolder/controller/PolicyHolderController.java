@@ -41,4 +41,8 @@ public class PolicyHolderController {
     public ResponseEntity<APIResponse> deletePolicyHolder(@RequestBody PolicyHolderDTO payload,HttpServletRequest request){
         return  buildResponseEntity(HttpStatus.OK,policyHolderService.deletePolicyHolder(payload),request.getRequestURI());
     }
+    @GetMapping("/quotation")
+    public ResponseEntity<APIResponse> getServiceProvidersServicesAndPremiums(HttpServletRequest request){
+        return buildResponseEntity(HttpStatus.OK,policyHolderService.getServiceProvidersServicesAndPremiums(),request.getRequestURI());
+    }
 }
