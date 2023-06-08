@@ -1,5 +1,6 @@
 package com.fiona.Limits.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fiona.ServiceProviders.Model.ServiceProviderModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,7 +22,8 @@ public class PremiumLimit {
     private Integer maximumAge;
     @Column(name = "premium")
     private Integer premium;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn(name = "serviceProviderId")
+    @JsonBackReference
     private ServiceProviderModel serviceProviderId;
 }

@@ -1,5 +1,6 @@
 package com.fiona.ServiceProviders.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fiona.HospitalLevels.model.HospitalLevels;
 import com.fiona.Limits.model.PremiumLimit;
 import com.fiona.Services.Model.ServicesModel;
@@ -25,13 +26,15 @@ public class ServiceProviderModel {
     private String name;
     @Column(name="serviceProviderLocation")
     private String location;
-   @OneToMany(mappedBy="serviceId",cascade = CascadeType.ALL,orphanRemoval=true)
+   @OneToMany(mappedBy="serviceProviderId",cascade = CascadeType.ALL,orphanRemoval=true)
+   @JsonManagedReference
     private List<ServicesModel> services;
     @ManyToOne
     @JoinColumn(name = "levelId")
     private HospitalLevels levelId;
-    @OneToMany(mappedBy = "premiumLimitId",cascade =CascadeType.ALL,orphanRemoval = true )
+    @OneToMany(mappedBy = "serviceProviderId",cascade =CascadeType.ALL,orphanRemoval = true )
     @Column(name="premiumLimitId")
+    @JsonManagedReference
     private  List<PremiumLimit> premiumLimit ;
 
 

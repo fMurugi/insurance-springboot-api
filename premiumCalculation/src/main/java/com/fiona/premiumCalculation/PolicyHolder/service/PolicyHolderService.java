@@ -1,7 +1,9 @@
 package com.fiona.premiumCalculation.PolicyHolder.service;
 
 
+import com.fiona.premiumCalculation.Classes.APIResponse;
 import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
+import com.fiona.premiumCalculation.FeignClient.Client;
 import com.fiona.premiumCalculation.PolicyHolder.model.PolicyHolderModel;
 import com.fiona.premiumCalculation.PolicyHolder.payload.PolicyHolderDTO;
 import com.fiona.premiumCalculation.PolicyHolder.repository.PolicyHolderRepository;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class PolicyHolderService {
     private PolicyHolderRepository policyHolderRepository;
     private ModelMapper modelMapper;
+    private Client client;
 
     public PolicyHolderDTO registerAPolicyHolder(PolicyHolderDTO data){
         PolicyHolderModel policyHolderModel = modelMapper.map(data, PolicyHolderModel.class);
@@ -55,6 +58,10 @@ public class PolicyHolderService {
         PolicyHolderModel policyHolderModel = findPolicyHolderById(data.getPolicyHolderId());
         policyHolderRepository.delete(policyHolderModel);
         return getAllPolicyHolder();
+    }
+
+    public APIResponse<?> getServiceProvidersServicesAndPremiums(){
+        return client.getServicesProvidersAndLimits();
     }
 
 

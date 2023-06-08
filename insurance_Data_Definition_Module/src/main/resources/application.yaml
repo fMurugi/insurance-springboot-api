@@ -29,7 +29,7 @@ spring:
       enabled: true
 
   application:
-    name: data_definition_service
+    name: dataDefinitionService
 
 logging:
   level:
