@@ -1,13 +1,12 @@
 package com.fiona.premiumCalculation.PolicyHolder.service;
 
 
-import com.fiona.premiumCalculation.Classes.APIResponse;
+import com.fiona.Classes.APIResponse;
+import com.fiona.DataDefinitionClient;
 import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
-import com.fiona.premiumCalculation.FeignClient.Client;
 import com.fiona.premiumCalculation.PolicyHolder.model.PolicyHolderModel;
 import com.fiona.premiumCalculation.PolicyHolder.payload.PolicyHolderDTO;
 import com.fiona.premiumCalculation.PolicyHolder.repository.PolicyHolderRepository;
-import com.google.common.util.concurrent.CycleDetectingLockFactory;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -21,8 +20,7 @@ import java.util.stream.Collectors;
 public class PolicyHolderService {
     private PolicyHolderRepository policyHolderRepository;
     private ModelMapper modelMapper;
-    private Client client;
-
+    private DataDefinitionClient dataDefinitionClient;
     public PolicyHolderDTO registerAPolicyHolder(PolicyHolderDTO data){
         PolicyHolderModel policyHolderModel = modelMapper.map(data, PolicyHolderModel.class);
 
@@ -61,7 +59,7 @@ public class PolicyHolderService {
     }
 
     public APIResponse<?> getServiceProvidersServicesAndPremiums(){
-        return client.getServicesProvidersAndLimits();
+        return dataDefinitionClient.getServicesProvidersAndLimits();
     }
 
 
