@@ -5,8 +5,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-@FeignClient(name = "dataDefinition",url = "http://ocalhost:8080/api/v1/data_definition/service_providers")
+@FeignClient(name = "dataDefinitionService",url = "http://localhost:8080")
 public interface Client {
-    @GetMapping("/get_service_providers_premiums")
-    APIResponse<?> getServicesProvidersAndLimits();
+    @GetMapping("/api/v1/data_definition/service_providers/get_all_service_providers")
+      APIResponse<?> getServicesProvidersAndLimits();
 }
