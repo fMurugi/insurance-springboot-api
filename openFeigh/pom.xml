@@ -22,16 +22,11 @@
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-openfeign-core</artifactId>
-            <version>4.0.3</version>
-            <scope>compile</scope>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>3.1.4</version>
         </dependency>
-        <dependency>
-            <groupId>com.fiona</groupId>
-            <artifactId>dataDefinitionModule</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+
+
 
 
     </dependencies>

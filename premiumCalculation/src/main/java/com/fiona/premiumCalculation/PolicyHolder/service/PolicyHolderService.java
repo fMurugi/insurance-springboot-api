@@ -1,7 +1,6 @@
 package com.fiona.premiumCalculation.PolicyHolder.service;
 
 
-import com.fiona.Classes.APIResponse;
 import com.fiona.DataDefinitionClient;
 import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
 import com.fiona.premiumCalculation.PolicyHolder.model.PolicyHolderModel;
@@ -58,8 +57,8 @@ public class PolicyHolderService {
         return getAllPolicyHolder();
     }
 
-    public APIResponse<?> getServiceProvidersServicesAndPremiums(){
-        return dataDefinitionClient.getServicesProvidersAndLimits();
+    public List<?> getServiceProvidersServicesAndPremiums(){
+        return dataDefinitionClient .getServicesProvidersAndLimits();
     }
 
 
