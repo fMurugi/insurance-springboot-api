@@ -25,8 +25,7 @@ public class PolicyHolderModel {
     private Integer age;
     private String phoneNumber;
     private Boolean hasChronicDisease;
-    @OneToMany(mappedBy = "policyHolderId",cascade =CascadeType.ALL,orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(cascade =CascadeType.ALL,orphanRemoval = true)
     private List<DependentsModel> dependents;
 
 }

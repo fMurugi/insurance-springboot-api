@@ -16,7 +16,9 @@
 	<description>Demo project for Spring Boot</description>
     <modules>
         <module>openFeigh</module>
-    </modules>
+		<module>insurance_Data_Definition_Module</module>
+		<module>premiumCalculation</module>
+	</modules>
     <properties>
 		<java.version>17</java.version>
 	</properties>
