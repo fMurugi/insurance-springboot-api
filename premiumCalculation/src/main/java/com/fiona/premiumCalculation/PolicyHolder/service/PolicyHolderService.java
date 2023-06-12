@@ -1,13 +1,11 @@
 package com.fiona.premiumCalculation.PolicyHolder.service;
 
 
-import com.fiona.premiumCalculation.Classes.APIResponse;
+import com.fiona.DataDefinitionClient;
 import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
-import com.fiona.premiumCalculation.FeignClient.Client;
 import com.fiona.premiumCalculation.PolicyHolder.model.PolicyHolderModel;
 import com.fiona.premiumCalculation.PolicyHolder.payload.PolicyHolderDTO;
 import com.fiona.premiumCalculation.PolicyHolder.repository.PolicyHolderRepository;
-import com.google.common.util.concurrent.CycleDetectingLockFactory;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -21,16 +19,11 @@ import java.util.stream.Collectors;
 public class PolicyHolderService {
     private PolicyHolderRepository policyHolderRepository;
     private ModelMapper modelMapper;
-    private Client client;
-
+    private DataDefinitionClient dataDefinitionClient;
     public PolicyHolderDTO registerAPolicyHolder(PolicyHolderDTO data){
         PolicyHolderModel policyHolderModel = modelMapper.map(data, PolicyHolderModel.class);
 
-        for (DependentsModel dependent : data.getDependents()) {
-            DependentsModel dependentEntity = modelMapper.map(dependent, DependentsModel.class);
-            dependentEntity.setPolicyHolderId(policyHolderModel);
-            policyHolderModel.getDependents().add(dependentEntity);
-        }
+
         PolicyHolderModel policyHolderModelDbResponse = policyHolderRepository.save(policyHolderModel);
         return  modelMapper.map(policyHolderModelDbResponse,PolicyHolderDTO.class);
     }
@@ -60,8 +53,8 @@ public class PolicyHolderService {
         return getAllPolicyHolder();
     }
 
-    public APIResponse<?> getServiceProvidersServicesAndPremiums(){
-        return client.getServicesProvidersAndLimits();
+    public List<?> getServiceProvidersServicesAndPremiums(){
+        return dataDefinitionClient .getServicesProvidersAndLimits();
     }
 
 

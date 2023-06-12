@@ -29,11 +29,11 @@ public class DependentsModel {
     private Integer age;
     @Column(name="hasChronicDisease")
     private Boolean hasChronicDisease;
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn(name="policyHolderId")
-    @JsonBackReference
-    private PolicyHolderModel policyHolderId;
-//    -TODO add chronic disease -done
+//    @ManyToOne
+//    @JoinColumn(name="policyHolderId")
+//    @JsonBackReference
+//    private PolicyHolderModel policyHolderId;
+////    -TODO add chronic disease -done
 //    -TODO add validations eg phone number
 
 //    private enum relateToPolicyHolder;
