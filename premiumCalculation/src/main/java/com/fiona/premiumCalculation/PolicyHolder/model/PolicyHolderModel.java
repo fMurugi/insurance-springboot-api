@@ -28,4 +28,5 @@ public class PolicyHolderModel {
     @OneToMany(cascade =CascadeType.ALL,orphanRemoval = true)
     private List<DependentsModel> dependents;
 
+
 }

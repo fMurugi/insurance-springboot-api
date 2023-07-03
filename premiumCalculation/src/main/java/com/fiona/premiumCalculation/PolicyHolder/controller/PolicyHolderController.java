@@ -1,5 +1,6 @@
 package com.fiona.premiumCalculation.PolicyHolder.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fiona.premiumCalculation.Classes.APIResponse;
 import com.fiona.premiumCalculation.PolicyHolder.payload.PolicyHolderDTO;
 import com.fiona.premiumCalculation.PolicyHolder.service.PolicyHolderService;
@@ -19,6 +20,7 @@ import static com.fiona.premiumCalculation.utilities.ApiResponseBuilder.buildRes
 @AllArgsConstructor
 public class PolicyHolderController {
     private final PolicyHolderService policyHolderService;
+
 
     @PostMapping("/register_policy_holder")
     public ResponseEntity<APIResponse> registerAPolicyHolder(@RequestBody @Valid PolicyHolderDTO payload, HttpServletRequest request){
@@ -42,7 +44,7 @@ public class PolicyHolderController {
         return  buildResponseEntity(HttpStatus.OK,policyHolderService.deletePolicyHolder(payload),request.getRequestURI());
     }
     @GetMapping("/quotation")
-    public ResponseEntity<APIResponse> getServiceProvidersServicesAndPremiums(HttpServletRequest request){
+    public ResponseEntity<APIResponse> getServiceProvidersServicesAndPremiums(HttpServletRequest request) throws JsonProcessingException {
         return buildResponseEntity(HttpStatus.OK,policyHolderService.getServiceProvidersServicesAndPremiums(),request.getRequestURI());
     }
 }
