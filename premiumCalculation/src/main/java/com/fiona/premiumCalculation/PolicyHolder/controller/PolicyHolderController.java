@@ -19,7 +19,7 @@ import static com.fiona.premiumCalculation.utilities.ApiResponseBuilder.buildRes
 @RequestMapping("api/v1/premium_calculations/policy_holders")
 @AllArgsConstructor
 public class PolicyHolderController {
-    private final PolicyHolderService policyHolderService;
+    private  PolicyHolderService policyHolderService;
 
 
     @PostMapping("/register_policy_holder")

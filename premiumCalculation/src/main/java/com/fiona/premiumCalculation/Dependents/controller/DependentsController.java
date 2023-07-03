@@ -18,7 +18,9 @@ import static com.fiona.premiumCalculation.utilities.ApiResponseBuilder.buildRes
 @RequestMapping("api/v1/premium_calculations/dependents")
 @AllArgsConstructor
 public class DependentsController {
-    private final DependentService dependentService;
+    private  DependentService dependentService;
+
+
 
     @PostMapping("/register_dependant")
     public ResponseEntity<APIResponse> registerDependent(@RequestBody @Valid DependentsDTO payload, HttpServletRequest request){

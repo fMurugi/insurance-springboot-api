@@ -1,5 +1,7 @@
 package com.fiona.premiumCalculation.Exceptions;
 
+import io.sentry.Sentry;
+import io.sentry.protocol.SentryId;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.Map;
 public class CustomExceptionHandler  {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleDependentvalidationException(MethodArgumentNotValidException ex){
+        Sentry.captureException(ex);
         Map<String, String> errorMap = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
