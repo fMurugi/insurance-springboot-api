@@ -1,0 +1,47 @@
+<configuration>
+    <!-- Configure the Console appender -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configure the Sentry appender, overriding the logging threshold to the WARN level -->
+    <appender name="Sentry" class="io.sentry.logback.SentryAppender">
+        <options>
+            <!-- NOTE: Replace the test DSN below with YOUR OWN DSN to see the events from this app in your Sentry project/dashboard -->
+            <dsn> https://d37e8c7912cb409bb8bc62fa9a7667c7@o4505465344098304.ingest.sentry.io/4505465353994240</dsn>
+        </options>
+        <!-- Optionally change minimum Event level. Default for Events is ERROR -->
+        <minimumEventLevel>WARN</minimumEventLevel>
+        <!-- Optionally change minimum Breadcrumbs level. Default for Breadcrumbs is INFO -->
+        <minimumBreadcrumbLevel>DEBUG</minimumBreadcrumbLevel>
+
+    </appender>
+    <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/app-logback.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <layout class="ch.qos.logback.classic.PatternLayout"></layout>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/archived/app/-%d{yyyy-MM-dd}.%i-logback.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Enable the Console and Sentry appenders, Console is provided as an example
+ of a non-Sentry logger that is set to a different logging threshold -->
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="Sentry" />
+        <appender-ref ref="File"/>
+    </root>
+
+    <logger name="com.fiona" level="DEBUG" additivity="false">
+        <appender-ref ref="File"/>
+        <appender-ref ref="Sentry"/>
+    </logger>
+</configuration>
