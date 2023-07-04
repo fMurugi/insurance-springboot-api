@@ -31,4 +31,7 @@ sentry:
   dsn: https://d37e8c7912cb409bb8bc62fa9a7667c7@o4505465344098304.ingest.sentry.io/4505465353994240
   # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
   # We recommend adjusting this value in production.
-  traces-sample-rate: 1.0
+#  traces-sample-rate: 1.0
+  send-default-pii: true
+  in-app-includes: com.fiona.premiumCalculation
+
