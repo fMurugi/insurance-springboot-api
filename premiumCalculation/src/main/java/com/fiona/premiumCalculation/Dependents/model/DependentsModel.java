@@ -1,7 +1,7 @@
 package com.fiona.premiumCalculation.Dependents.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fiona.premiumCalculation.PolicyHolder.model.PolicyHolderModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,6 +35,7 @@ public class DependentsModel {
 //    private PolicyHolderModel policyHolderId;
 ////    -TODO add chronic disease -done
 //    -TODO add validations eg phone number
+
 
 //    private enum relateToPolicyHolder;
 

@@ -14,7 +14,7 @@ server:
 
 spring:
   application:
-    name: premiumCalculations
+    name: premiumCalculation
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${dbUrl}
@@ -34,4 +34,5 @@ sentry:
 #  traces-sample-rate: 1.0
   send-default-pii: true
   in-app-includes: com.fiona.premiumCalculation
+
 
