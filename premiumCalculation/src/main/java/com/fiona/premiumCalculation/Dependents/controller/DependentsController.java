@@ -27,7 +27,9 @@ public class DependentsController {
     }
 
     @PostMapping("/update_dependent")
+
     public ResponseEntity<APIResponse> updateDependent(@RequestBody DependentsDTO payload,HttpServletRequest request){
+
         List<DependentsDTO> dependentsDTOS = dependentService.updateDependents(payload);
         return  buildResponseEntity(HttpStatus.ACCEPTED,dependentsDTOS,request.getRequestURI());
     }
