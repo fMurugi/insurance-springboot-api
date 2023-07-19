@@ -1,16 +1,20 @@
 eureka:
   instance:
     hostname: localhost
+    preferIpAddress: true
   client:
     service-url:
-      defaultZone:  http://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka
+    registerWithEureka: true
+    fetchRegistry: true
 
 server:
   port: 8070
 
 spring:
   application:
-    name: premiumCalculations
+
+    name: premiumCalculation
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${dbUrl}
@@ -21,5 +25,7 @@ spring:
       ddl-auto: update
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
   mvc:
     throw-exception-if-no-handler-found: true
+

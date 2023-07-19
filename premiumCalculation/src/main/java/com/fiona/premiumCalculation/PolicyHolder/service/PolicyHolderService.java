@@ -1,6 +1,6 @@
 package com.fiona.premiumCalculation.PolicyHolder.service;
 
-import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
+
 import com.fiona.premiumCalculation.PolicyHolder.model.PolicyHolderModel;
 import com.fiona.premiumCalculation.PolicyHolder.payload.PolicyHolderDTO;
 import com.fiona.premiumCalculation.PolicyHolder.repository.PolicyHolderRepository;
@@ -21,11 +21,7 @@ public class PolicyHolderService {
 
     public PolicyHolderDTO registerAPolicyHolder(PolicyHolderDTO data){
         PolicyHolderModel policyHolderModel = modelMapper.map(data, PolicyHolderModel.class);
-        for (DependentsModel dependent : data.getDependents()) {
-            DependentsModel dependentEntity = modelMapper.map(dependent, DependentsModel.class);
-            dependentEntity.setPolicyHolderId(policyHolderModel);
-            policyHolderModel.getDependents().add(dependentEntity);
-        }
+
         PolicyHolderModel policyHolderModelDbResponse = policyHolderRepository.save(policyHolderModel);
         return  modelMapper.map(policyHolderModelDbResponse,PolicyHolderDTO.class);
     }

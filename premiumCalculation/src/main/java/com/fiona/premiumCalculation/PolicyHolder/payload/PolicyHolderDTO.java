@@ -3,6 +3,7 @@ package com.fiona.premiumCalculation.PolicyHolder.payload;
 
 
 import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
+
 import com.fiona.premiumCalculation.Validation.ValidatePhoneNumber;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Data
 public class PolicyHolderDTO {
     private UUID policyHolderId;
+
     @NotBlank(message = "first name cannot be empty or null")
     private String firstName;
     @NotBlank(message = "last name cannot be empty or null")

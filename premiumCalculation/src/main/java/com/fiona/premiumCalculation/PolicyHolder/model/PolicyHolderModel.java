@@ -29,10 +29,12 @@ public class PolicyHolderModel {
     private String firstName;
     private String lastName;
     private Integer age;
+
     private String phoneNumber;
     private Boolean hasChronicDisease;
     @OneToMany(mappedBy = "policyHolderId",cascade =CascadeType.ALL,orphanRemoval = true)
     @JsonManagedReference
+
     private List<DependentsModel> dependents;
 
 }

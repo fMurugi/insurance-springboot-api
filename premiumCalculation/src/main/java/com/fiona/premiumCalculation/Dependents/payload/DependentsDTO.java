@@ -1,9 +1,12 @@
 package com.fiona.premiumCalculation.Dependents.payload;
 
+
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DependentsDTO {
     private UUID dependentId;
+
     @NotBlank(message = "first name CANNOT BE EMPTY")
     private String firstName;
     @NotBlank(message = "last name CANNOT BE EMPTY")
@@ -26,4 +30,5 @@ public class DependentsDTO {
     private UUID policyHolderId;
 
 //    TODO WRITE exception handling ,or error messages for these and others
+
 }
