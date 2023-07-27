@@ -21,24 +21,21 @@ spring:
 #    web-application-type: reactive
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-
       routes:
         - id: data_definition_service
           uri: http://localhost:8080
           predicates:
             - Path=/api/v1/data_definition/**
+          filters:
         - id: premium_calculations_service
           uri: http://localHost:8070
           predicates:
             - Path=/api/v1/premium_calculations/**
-
           filters:
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 2
+
 
 
