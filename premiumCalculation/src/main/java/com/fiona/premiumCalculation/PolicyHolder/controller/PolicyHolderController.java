@@ -44,7 +44,7 @@ public class PolicyHolderController {
         return  buildResponseEntity(HttpStatus.OK,policyHolderService.deletePolicyHolder(payload),request.getRequestURI());
     }
     @GetMapping("/quotation")
-    public ResponseEntity<APIResponse> getServiceProvidersServicesAndPremiums(HttpServletRequest request) throws JsonProcessingException {
-        return buildResponseEntity(HttpStatus.OK,policyHolderService.getServiceProvidersServicesAndPremiums(),request.getRequestURI());
+    public ResponseEntity<APIResponse> getServiceProvidersServicesAndPremiums(@RequestBody PolicyHolderDTO policyHolderDTO,HttpServletRequest request) throws JsonProcessingException {
+        return buildResponseEntity(HttpStatus.OK,policyHolderService.getServiceProvidersServicesAndPremiums(policyHolderDTO),request.getRequestURI());
     }
 }
