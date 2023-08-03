@@ -1,0 +1,11 @@
+#server:
+#  port: 8021
+#
+#keycloak:
+#  auth-server-url: http://localhost:8100/auth
+#  realm: my_realm
+#  resource: insurance-app
+#  bearer-only: true
+#  ssl-required: external
+#  use-resource-role-mappings: true
+#  public-client: true

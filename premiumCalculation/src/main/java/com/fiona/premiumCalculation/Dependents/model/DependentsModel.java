@@ -2,6 +2,7 @@ package com.fiona.premiumCalculation.Dependents.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fiona.premiumCalculation.PolicyHolder.model.PolicyHolderModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,10 +30,18 @@ public class DependentsModel {
     private Integer age;
     @Column(name="hasChronicDisease")
     private Boolean hasChronicDisease;
-//    @ManyToOne
-//    @JoinColumn(name="policyHolderId")
-//    @JsonBackReference
-//    private PolicyHolderModel policyHolderId;
+    @ManyToOne
+    @JoinColumn(name="policyHolderId")
+    @JsonBackReference
+    private PolicyHolderModel policyHolderId;
+
+
+
+    public DependentsModel(String firstName, String lastName, Integer age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
 ////    -TODO add chronic disease -done
 //    -TODO add validations eg phone number
 

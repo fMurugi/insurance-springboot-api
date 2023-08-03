@@ -15,6 +15,11 @@ server:
 spring:
   application:
     name: premiumCalculation
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8100/auth/realms/my_realm
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${dbUrl}
@@ -35,4 +40,10 @@ sentry:
   send-default-pii: true
   in-app-includes: com.fiona.premiumCalculation
 
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  shareSecurityContext: true
 

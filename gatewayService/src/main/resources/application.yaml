@@ -11,13 +11,13 @@ spring:
   redis:
     host: localhost
     port: 6380
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8100/auth/realms/my_realm
-#          jwk-set-uri: http://localhost:8100/auth/realms/my_realm/protocol/openid-connect/certs
-#  main:
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8100/auth/realms/my_realm
+##          jwk-set-uri: http://localhost:8100/auth/realms/my_realm/protocol/openid-connect/certs
+##  main:
 #    web-application-type: reactive
   cloud:
     gateway:
@@ -27,11 +27,13 @@ spring:
           predicates:
             - Path=/api/v1/data_definition/**
           filters:
+            - RemoveRequestHeader= Cookie,Set-Cookie
         - id: premium_calculations_service
           uri: http://localHost:8070
           predicates:
             - Path=/api/v1/premium_calculations/**
           filters:
+            - RemoveRequestHeader= Cookie,Set-Cookie
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 1
