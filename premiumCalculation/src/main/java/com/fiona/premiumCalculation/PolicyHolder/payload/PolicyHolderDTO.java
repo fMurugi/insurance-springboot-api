@@ -4,6 +4,7 @@ package com.fiona.premiumCalculation.PolicyHolder.payload;
 
 import com.fiona.premiumCalculation.Dependents.model.DependentsModel;
 
+import com.fiona.premiumCalculation.Dependents.payload.DependentsDTO;
 import com.fiona.premiumCalculation.Validation.ValidatePhoneNumber;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -28,10 +29,11 @@ public class PolicyHolderDTO {
     @Min(value= 18,message = "policy holder must be  18 years old and above")
     @Max(value = 60, message = "policy holder cannot be older than 60")
     private Integer age;
+    private Boolean hasChronicDisease;
+
     @ValidatePhoneNumber
     private String phoneNumber;
-    private List<DependentsModel> dependents;
-
+    private List<DependentsDTO> dependents;
 
 
 
