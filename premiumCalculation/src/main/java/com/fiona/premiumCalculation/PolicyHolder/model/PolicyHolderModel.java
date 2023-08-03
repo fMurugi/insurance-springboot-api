@@ -24,7 +24,6 @@ public class PolicyHolderModel {
     private String firstName;
     private String lastName;
     private Integer age;
-
     private String phoneNumber;
     private Boolean hasChronicDisease;
     @OneToMany(mappedBy = "policyHolderId",cascade =CascadeType.ALL,orphanRemoval = true)
@@ -32,4 +31,15 @@ public class PolicyHolderModel {
     private List<DependentsModel> dependents;
 
 
+
+
+
+    public PolicyHolderModel(String firstName, String lastName, Integer age, String phoneNumber, Boolean hasChronicDisease, List<DependentsModel> dependents) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
+        this.hasChronicDisease = hasChronicDisease;
+        this.dependents = dependents;
+    }
 }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
-public class APIResponse<T>{
+public class   APIResponse<T>{
 
 //    private String message;
 //    private List<> errors;

@@ -9,4 +9,5 @@ public class OpenFeignConfiguration {
         SpringApplication.run(OpenFeignConfiguration.class, args);
     }
 
+
 }
